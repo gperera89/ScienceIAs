@@ -55,9 +55,146 @@ export const scoreSlice = createSlice({
 				PEC: action.payload,
 			};
 		},
+		updateEx1: (state, action) => {
+			return {
+				...state,
+				Ex1: action.payload,
+			};
+		},
+		updateEx2: (state, action) => {
+			return {
+				...state,
+				Ex2: action.payload,
+			};
+		},
+		updateEx3: (state, action) => {
+			return {
+				...state,
+				Ex3: action.payload,
+			};
+		},
+		updateEx4: (state, action) => {
+			return {
+				...state,
+				Ex4: action.payload,
+			};
+		},
+		updateExC: (state, action) => {
+			return {
+				...state,
+				ExC: action.payload,
+			};
+		},
+		updateAn1: (state, action) => {
+			return {
+				...state,
+				An1: action.payload,
+			};
+		},
+		updateAn2: (state, action) => {
+			return {
+				...state,
+				An2: action.payload,
+			};
+		},
+		updateAn3: (state, action) => {
+			return {
+				...state,
+				An3: action.payload,
+			};
+		},
+		updateAn4: (state, action) => {
+			return {
+				...state,
+				An4: action.payload,
+			};
+		},
+		updateAnC: (state, action) => {
+			return {
+				...state,
+				AnC: action.payload,
+			};
+		},
+		updateEv1: (state, action) => {
+			return {
+				...state,
+				Ev1: action.payload,
+			};
+		},
+		updateEv2: (state, action) => {
+			return {
+				...state,
+				Ev2: action.payload,
+			};
+		},
+		updateEv3: (state, action) => {
+			return {
+				...state,
+				Ev3: action.payload,
+			};
+		},
+		updateEv4: (state, action) => {
+			return {
+				...state,
+				Ev4: action.payload,
+			};
+		},
+		updateEvC: (state, action) => {
+			return {
+				...state,
+				EvC: action.payload,
+			};
+		},
+		updateCo1: (state, action) => {
+			return {
+				...state,
+				Co1: action.payload,
+			};
+		},
+		updateCo2: (state, action) => {
+			return {
+				...state,
+				Co2: action.payload,
+			};
+		},
+		updateCo3: (state, action) => {
+			return {
+				...state,
+				Co3: action.payload,
+			};
+		},
+		updateCoC: (state, action) => {
+			return {
+				...state,
+				CoC: action.payload,
+			};
+		},
 	},
 });
 
-export const { updatePE1, updatePE2, updatePE3, updatePEC } =
-	scoreSlice.actions;
+export const {
+	updatePE1,
+	updatePE2,
+	updatePE3,
+	updatePEC,
+	updateEx1,
+	updateEx2,
+	updateEx3,
+	updateEx4,
+	updateExC,
+	updateAn1,
+	updateAn2,
+	updateAn3,
+	updateAn4,
+	updateAnC,
+	updateEv1,
+	updateEv2,
+	updateEv3,
+	updateEv4,
+	updateEvC,
+	updateCo1,
+	updateCo2,
+	updateCo3,
+	updateCoC,
+} = scoreSlice.actions;
 export default scoreSlice.reducer;

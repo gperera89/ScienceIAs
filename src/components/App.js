@@ -5,9 +5,13 @@ import Exploration from "./Exploration";
 import Analysis from "./Analysis";
 import Evaluation from "./Evaluation";
 import Communication from "./Communication";
+import { useSelector } from "react-redux";
+
 import "../style.css";
 
 const App = () => {
+	const guidance = useSelector((state) => state.guidance.guidance);
+
 	return (
 		<>
 			<div className='header'>
@@ -15,12 +19,7 @@ const App = () => {
 					IB Sciences <br /> Internal Assessment <br /> Marking Tool
 				</h1>
 				<div className='guidance'>
-					<p>
-						Strengths and weaknesses of the investigation, such as limitations
-						of the data and sources of error, are described and provide evidence
-						of some awareness of the methodological issues involved in
-						establishing the conclusion.
-					</p>
+					<p>{guidance}</p>
 				</div>
 			</div>
 			<div className='accordion-section'>

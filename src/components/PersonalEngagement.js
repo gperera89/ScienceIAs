@@ -8,6 +8,7 @@ import {
 	updatePE3,
 	updatePEC,
 } from "../redux/scoreSlice";
+import { giveGuidance } from "../redux/guidanceSlice";
 
 const PersonalEngagement = () => {
 	//assiging the state of PE1, PE2 and PEC stored in the scoreSlide as these varibles
@@ -23,6 +24,13 @@ const PersonalEngagement = () => {
 				<p>Personal Engagement with Exploration</p>
 				<Button
 					onClick={() => dispatch(updatePE1(0))}
+					onMouseOver={() =>
+						dispatch(
+							giveGuidance(
+								"The students report does not reach a standard described by the descriptors below."
+							)
+						)
+					}
 					type='button'
 					className='btn primary'>
 					0
