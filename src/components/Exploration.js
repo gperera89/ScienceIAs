@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "./Button";
 import "./Criteria.css";
+import { Calculate } from "./Calculate";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	updateEx1,
@@ -9,6 +10,7 @@ import {
 	updateEx4,
 	updateExC,
 } from "../redux/scoreSlice";
+import { giveGuidance } from "../redux/guidanceSlice";
 
 const Exploration = () => {
 	const Ex1state = useSelector((state) => state.score.Ex1);
@@ -17,6 +19,140 @@ const Exploration = () => {
 	const Ex4state = useSelector((state) => state.score.Ex4);
 	const ExCstate = useSelector((state) => state.score.ExC);
 	const dispatch = useDispatch();
+	const isMounted = useRef(false);
+
+	useEffect(() => {
+		if (isMounted.current) {
+			let statement;
+			switch (Ex1state) {
+				case 0:
+					statement =
+						"The student's report does not reach a standard described by the descriptors below.";
+					break;
+				case 1:
+				case 2:
+					statement =
+						"The topic of the investigation is identified and a research question of some relevance is stated but it is not focused";
+					break;
+				case 3:
+				case 4:
+					statement =
+						"The topic of the investigation is identified and a relevant but not fully focused research question is described.";
+					break;
+				case 5:
+				case 6:
+					statement =
+						"The topic of the investigation is identified and a relevant and fully focused research question is clearly described.";
+					break;
+				default:
+					statement = "";
+			}
+			dispatch(giveGuidance(statement));
+		} else {
+			isMounted.current = true;
+		}
+	}, [Ex1state, dispatch]);
+
+	useEffect(() => {
+		if (isMounted.current) {
+			let statement;
+			switch (Ex2state) {
+				case 0:
+					statement =
+						"The student's report does not reach a standard described by the descriptors below.";
+					break;
+				case 1:
+				case 2:
+					statement =
+						"The background information provided for the investigation is superficial or of limited relevance and does not aid the understanding of the context of the investigation.";
+					break;
+				case 3:
+				case 4:
+					statement =
+						"The background information provided for the investigation is mainly appropriate and relevant and aids the understanding of the context of the investigation.";
+					break;
+				case 5:
+				case 6:
+					statement =
+						"The background information provided for the investigation is entirely appropriate and relevant and enhances the understanding of the context of the investigation. ";
+					break;
+				default:
+					statement = "";
+			}
+			dispatch(giveGuidance(statement));
+		} else {
+			isMounted.current = true;
+		}
+	}, [Ex2state, dispatch]);
+
+	useEffect(() => {
+		if (isMounted.current) {
+			let statement;
+			switch (Ex3state) {
+				case 0:
+					statement =
+						"The student's report does not reach a standard described by the descriptors below.";
+					break;
+				case 1:
+				case 2:
+					statement =
+						"The methodology of the investigation is only appropriate to address the research question to a very limited extent since it takes into consideration few of the significant factors that may influence the relevance, reliability and sufficiency of the collected data";
+					break;
+				case 3:
+				case 4:
+					statement =
+						"The methodology of the investigation is mainly appropriate to address the research question but has limitations since it takes into consideration only some of the significant factors that may influence the relevance, reliability and sufficiency of the collected data";
+					break;
+				case 5:
+				case 6:
+					statement =
+						"The methodology of the investigation is highly appropriate to address the research question because it takes into consideration all, or nearly all, of the significant factors that may influence the relevance, reliability and sufficiency of the collected data.";
+					break;
+				default:
+					statement = "";
+			}
+			dispatch(giveGuidance(statement));
+		} else {
+			isMounted.current = true;
+		}
+	}, [Ex3state, dispatch]);
+
+	useEffect(() => {
+		if (isMounted.current) {
+			let statement;
+			switch (Ex4state) {
+				case 0:
+					statement =
+						"The student's report does not reach a standard described by the descriptors below.";
+					break;
+				case 1:
+				case 2:
+					statement =
+						"The report shows evidence of limited awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation.";
+					break;
+				case 3:
+				case 4:
+					statement =
+						"The report shows evidence of some awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation";
+					break;
+				case 5:
+				case 6:
+					statement =
+						"The report shows evidence of full awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation";
+					break;
+				default:
+					statement = "";
+			}
+			dispatch(giveGuidance(statement));
+		} else {
+			isMounted.current = true;
+		}
+	}, [Ex4state, dispatch]);
+
+	useEffect(() => {
+		const ExStore = Calculate[(Ex1state, Ex2state, Ex3state, Ex4state)];
+		console.log(ExStore);
+	});
 
 	return (
 		<>
@@ -118,7 +254,7 @@ const Exploration = () => {
 					onClick={() => dispatch(updateEx3(0))}
 					type='button'
 					className='btn primary'>
-					0
+					0sw
 				</Button>
 				<Button
 					onClick={() => dispatch(updateEx3(1))}
@@ -215,7 +351,7 @@ const Exploration = () => {
 			</div>
 			<p>
 				Ex1: {Ex1state}, Ex2: {Ex2state}, Ex3: {Ex3state}, Ex4: {Ex4state},
-				Comment: {ExCstate}
+				Comment: {ExCstate} Suggested ExScore:
 			</p>
 		</>
 	);

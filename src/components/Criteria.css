@@ -18,3 +18,9 @@ textarea {
 	font-family: "Open Sans", sans-serif;
 	margin-bottom: 0.5rem;
 }
+
+.grade {
+	min-width: 10rem;
+	background-color: grey;
+	margin-left: 2rem;
+}
