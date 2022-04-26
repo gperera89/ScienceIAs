@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Button from "./Button";
 import "./Criteria.css";
-import { Calculate } from "./Calculate";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	updateEx1,
@@ -148,11 +147,6 @@ const Exploration = () => {
 			isMounted.current = true;
 		}
 	}, [Ex4state, dispatch]);
-
-	useEffect(() => {
-		const ExStore = Calculate[(Ex1state, Ex2state, Ex3state, Ex4state)];
-		console.log(ExStore);
-	});
 
 	return (
 		<>
@@ -351,7 +345,7 @@ const Exploration = () => {
 			</div>
 			<p>
 				Ex1: {Ex1state}, Ex2: {Ex2state}, Ex3: {Ex3state}, Ex4: {Ex4state},
-				Comment: {ExCstate} Suggested ExScore:
+				Comment: {ExCstate}
 			</p>
 		</>
 	);

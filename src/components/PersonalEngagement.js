@@ -9,7 +9,6 @@ import {
 	updatePEC,
 } from "../redux/scoreSlice";
 import { giveGuidance } from "../redux/guidanceSlice";
-import { personalEngagementGrade } from "../redux/gradeSlice";
 
 const PersonalEngagement = () => {
 	//assiging the state of PE1, PE2 and PEC stored in the scoreSlide as these varibles
@@ -19,7 +18,6 @@ const PersonalEngagement = () => {
 	const PECstate = useSelector((state) => state.score.PEC);
 	const dispatch = useDispatch();
 	const isMounted = useRef(false);
-	const PEAvg = Math.round((PE1state + PE2state + PE3state) / 3);
 
 	useEffect(() => {
 		if (isMounted.current) {
@@ -173,9 +171,7 @@ const PersonalEngagement = () => {
 					onChange={(event) => dispatch(updatePEC(event.target.value))}
 				/>
 				<div className='grade'>
-					PE1: {PE1state}, PE2: {PE2state}, PE3: {PE3state}
-					<br />
-					Suggested PE Grade: {PEAvg}
+					PE1: {PE1state}, PE2: {PE2state}, PE3: {PE3state} Comment: {PECstate}
 				</div>
 			</div>
 		</>
