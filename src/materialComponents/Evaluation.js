@@ -63,29 +63,29 @@ export default function Evaluation() {
 	const handleBlurEv1 = () => {
 		if (Ev1state < 0) {
 			dispatch(updateEv1(0));
-		} else if (Ev1state > 5) {
-			dispatch(updateEv1(5));
+		} else if (Ev1state > 6) {
+			dispatch(updateEv1(6));
 		}
 	};
 	const handleBlurEv2 = () => {
 		if (Ev2state < 0) {
 			dispatch(updateEv2(0));
-		} else if (Ev2state > 5) {
-			dispatch(updateEv2(5));
+		} else if (Ev2state > 6) {
+			dispatch(updateEv2(6));
 		}
 	};
 	const handleBlurEv3 = () => {
 		if (Ev3state < 0) {
 			dispatch(updateEv3(0));
-		} else if (Ev3state > 5) {
-			dispatch(updateEv3(5));
+		} else if (Ev3state > 6) {
+			dispatch(updateEv3(6));
 		}
 	};
 	const handleBlurEv4 = () => {
 		if (Ev4state < 0) {
 			dispatch(updateEv3(0));
-		} else if (Ev4state > 5) {
-			dispatch(updateEv3(5));
+		} else if (Ev4state > 6) {
+			dispatch(updateEv3(6));
 		}
 	};
 	return (
@@ -101,7 +101,7 @@ export default function Evaluation() {
 							onChange={handleSliderChangeEv1}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -114,7 +114,7 @@ export default function Evaluation() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -133,7 +133,7 @@ export default function Evaluation() {
 							onChange={handleSliderChangeEv2}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -146,7 +146,7 @@ export default function Evaluation() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -165,7 +165,7 @@ export default function Evaluation() {
 							onChange={handleSliderChangeEv3}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -178,7 +178,7 @@ export default function Evaluation() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -197,7 +197,7 @@ export default function Evaluation() {
 							onChange={handleSliderChangeEv4}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -210,7 +210,7 @@ export default function Evaluation() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}

@@ -63,29 +63,29 @@ export default function Analysis() {
 	const handleBlurAn1 = () => {
 		if (An1state < 0) {
 			dispatch(updateAn1(0));
-		} else if (An1state > 5) {
-			dispatch(updateAn1(5));
+		} else if (An1state > 6) {
+			dispatch(updateAn1(6));
 		}
 	};
 	const handleBlurAn2 = () => {
 		if (An2state < 0) {
 			dispatch(updateAn2(0));
-		} else if (An2state > 5) {
-			dispatch(updateAn2(5));
+		} else if (An2state > 6) {
+			dispatch(updateAn2(6));
 		}
 	};
 	const handleBlurAn3 = () => {
 		if (An3state < 0) {
 			dispatch(updateAn3(0));
-		} else if (An3state > 5) {
-			dispatch(updateAn3(5));
+		} else if (An3state > 6) {
+			dispatch(updateAn3(6));
 		}
 	};
 	const handleBlurAn4 = () => {
 		if (An4state < 0) {
 			dispatch(updateAn3(0));
-		} else if (An4state > 5) {
-			dispatch(updateAn3(5));
+		} else if (An4state > 6) {
+			dispatch(updateAn3(6));
 		}
 	};
 	return (
@@ -101,7 +101,7 @@ export default function Analysis() {
 							onChange={handleSliderChangeAn1}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -114,7 +114,7 @@ export default function Analysis() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -133,7 +133,7 @@ export default function Analysis() {
 							onChange={handleSliderChangeAn2}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -146,7 +146,7 @@ export default function Analysis() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -165,7 +165,7 @@ export default function Analysis() {
 							onChange={handleSliderChangeAn3}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -178,7 +178,7 @@ export default function Analysis() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -197,7 +197,7 @@ export default function Analysis() {
 							onChange={handleSliderChangeAn4}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -210,7 +210,7 @@ export default function Analysis() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}

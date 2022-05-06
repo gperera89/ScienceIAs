@@ -25,6 +25,7 @@ const initialState = {
 	Co3: 0,
 	Co4: 0,
 	CoC: "",
+	name: "",
 };
 
 export const scoreSlice = createSlice({
@@ -175,6 +176,12 @@ export const scoreSlice = createSlice({
 				CoC: action.payload,
 			};
 		},
+		updateName: (state, action) => {
+			return {
+				...state,
+				name: action.payload,
+			};
+		},
 	},
 });
 
@@ -203,5 +210,6 @@ export const {
 	updateCo3,
 	updateCo4,
 	updateCoC,
+	updateName,
 } = scoreSlice.actions;
 export default scoreSlice.reducer;

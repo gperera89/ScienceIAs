@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -63,31 +64,32 @@ export default function Exploration() {
 	const handleBlurEx1 = () => {
 		if (Ex1state < 0) {
 			dispatch(updateEx1(0));
-		} else if (Ex1state > 5) {
-			dispatch(updateEx1(5));
+		} else if (Ex1state > 6) {
+			dispatch(updateEx1(6));
 		}
 	};
 	const handleBlurEx2 = () => {
 		if (Ex2state < 0) {
 			dispatch(updateEx2(0));
-		} else if (Ex2state > 5) {
-			dispatch(updateEx2(5));
+		} else if (Ex2state > 6) {
+			dispatch(updateEx2(6));
 		}
 	};
 	const handleBlurEx3 = () => {
 		if (Ex3state < 0) {
 			dispatch(updateEx3(0));
-		} else if (Ex3state > 5) {
-			dispatch(updateEx3(5));
+		} else if (Ex3state > 6) {
+			dispatch(updateEx3(6));
 		}
 	};
 	const handleBlurEx4 = () => {
 		if (Ex4state < 0) {
 			dispatch(updateEx3(0));
-		} else if (Ex4state > 5) {
-			dispatch(updateEx3(5));
+		} else if (Ex4state > 6) {
+			dispatch(updateEx3(6));
 		}
 	};
+
 	return (
 		<Box>
 			<Box sx={{ width: 250 }}>
@@ -101,7 +103,7 @@ export default function Exploration() {
 							onChange={handleSliderChangeEx1}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -114,7 +116,7 @@ export default function Exploration() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -133,7 +135,7 @@ export default function Exploration() {
 							onChange={handleSliderChangeEx2}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -146,7 +148,7 @@ export default function Exploration() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -165,7 +167,7 @@ export default function Exploration() {
 							onChange={handleSliderChangeEx3}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -178,7 +180,7 @@ export default function Exploration() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}
@@ -197,7 +199,7 @@ export default function Exploration() {
 							onChange={handleSliderChangeEx4}
 							aria-labelledby='input-slider'
 							marks
-							max={5}
+							max={6}
 							min={0}
 						/>
 					</Grid>
@@ -210,7 +212,7 @@ export default function Exploration() {
 							inputProps={{
 								step: 1,
 								min: 0,
-								max: 5,
+								max: 6,
 								type: "number",
 								"aria-labelledby": "input-slider",
 							}}

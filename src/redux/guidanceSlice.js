@@ -4,7 +4,7 @@ export const guidanceSlice = createSlice({
 	name: "guidance",
 	initialState: { guidance: "" },
 	reducers: {
-		giveGuidance: (state, action) => {
+		updateGuidance: (state, action) => {
 			return {
 				...state,
 				guidance: action.payload,
@@ -13,5 +13,5 @@ export const guidanceSlice = createSlice({
 	},
 });
 
-export const { giveGuidance } = guidanceSlice.actions;
+export const { updateGuidance } = guidanceSlice.actions;
 export default guidanceSlice.reducer;

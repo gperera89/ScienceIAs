@@ -9,6 +9,7 @@ import Exploration from "./Exploration.js";
 import Analysis from "./Analysis.js";
 import Communication from "./Communication.js";
 import Evaluation from "./Evaluation.js";
+import Drawer from "./Drawer";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -69,6 +70,7 @@ export default function VerticalTabs() {
 				<Tab label='Analysis' {...a11yProps(2)} />
 				<Tab label='Evaluation' {...a11yProps(3)} />
 				<Tab label='Communication' {...a11yProps(4)} />
+				<Drawer />
 			</Tabs>
 			<TabPanel value={value} index={0}>
 				<PersonalEngagement />
