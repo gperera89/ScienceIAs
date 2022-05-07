@@ -1,5 +1,8 @@
 import * as React from "react";
+import { useRef } from "react";
+import { useScreenshot } from "use-screenshot-hook";
 import { Global } from "@emotion/react";
+import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import Fab from "@mui/material/Fab";
@@ -7,6 +10,9 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Table from "./Table";
 import { flexbox } from "@mui/system";
+import { Close } from "@mui/icons-material";
+// import { useDispatch } from "react-redux";
+import ReportModal from "./Modal";
 
 const StyledBox = styled(Box)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -15,12 +21,13 @@ const StyledBox = styled(Box)(({ theme }) => ({
 function Drawer(props) {
 	const { window } = props;
 	const [open, setOpen] = React.useState(false);
-
+	const imageRef = useRef(null);
+	const { image, takeScreenshot, clear } = useScreenshot({
+		ref: imageRef,
+	});
 	const toggleDrawer = (newOpen) => () => {
 		setOpen(newOpen);
 	};
-
-	// This is used only for the example
 	const container =
 		window !== undefined ? () => window().document.body : undefined;
 
@@ -58,7 +65,21 @@ function Drawer(props) {
 						width: "auto",
 						display: flexbox,
 					}}>
-					<Table />
+					<div ref={imageRef}>
+						<Table />
+					</div>
+					<Button onClick={() => takeScreenshot({ ref: imageRef })}>
+						Take Screenshot
+					</Button>
+					<Box>
+						<ReportModal image={image} clear={clear} />
+						{image && (
+							<div className='imageContainer'>
+								<img width={800} src={image} alt='screenshot' />
+								<Close onClick={clear} />
+							</div>
+						)}
+					</Box>
 				</StyledBox>
 			</SwipeableDrawer>
 		</>

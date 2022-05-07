@@ -1,7 +1,7 @@
 import { Container, CssBaseline, Paper } from "@mui/material";
-import React from "react";
 import TabPanel from "./TabPanel";
 import GuidanceBox from "./GuidanceBox";
+import Table from "./Table";
 
 const MaterialApp = () => {
 	return (

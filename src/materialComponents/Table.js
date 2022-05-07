@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,8 +9,17 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import TableHead from "@mui/material/TableHead";
 import Tooltip from "@mui/material/Tooltip";
+import TextField from "@mui/material/TextField";
+import {
+	updatePEFinal,
+	updateAnFinal,
+	updateCoFinal,
+	updateExFinal,
+	updateEvFinal,
+} from "../redux/scoreSlice";
 
-const IATable = () => {
+const IATable = ({ image, ref }) => {
+	const dispatch = useDispatch();
 	const PE1state = useSelector((state) => state.score.PE1);
 	const PE2state = useSelector((state) => state.score.PE2);
 	const PE3state = useSelector((state) => state.score.PE3);
@@ -35,7 +44,81 @@ const IATable = () => {
 	const Co3state = useSelector((state) => state.score.Co3);
 	const Co4state = useSelector((state) => state.score.Co4);
 	const CoCstate = useSelector((state) => state.score.CoC);
+	const PEFinal = useSelector((state) => state.score.PEFinal);
+	const ExFinal = useSelector((state) => state.score.ExFinal);
+	const AnFinal = useSelector((state) => state.score.AnFinal);
+	const EvFinal = useSelector((state) => state.score.EvFinal);
+	const CoFinal = useSelector((state) => state.score.CoFinal);
 	const nameState = useSelector((state) => state.score.name);
+
+	let PEAvg = Math.round((PE1state + PE2state + PE3state) / 3);
+	let ExAvg = Math.round((Ex1state + Ex2state + Ex3state + Ex4state) / 4);
+	let AnAvg = Math.round((An1state + An2state + An3state + An4state) / 4);
+	let EvAvg = Math.round((Ev1state + Ev2state + Ev3state + Ev4state) / 4);
+	let CoAvg = Math.round((Co1state + Co2state + Co3state + Co4state) / 4);
+
+	let finalScore = null;
+	if (
+		PEFinal === undefined ||
+		ExFinal === undefined ||
+		AnFinal === undefined ||
+		EvFinal === undefined ||
+		CoFinal === undefined
+	) {
+		finalScore = null;
+	} else {
+		finalScore =
+			Number(PEFinal) +
+			Number(ExFinal) +
+			Number(AnFinal) +
+			Number(EvFinal) +
+			Number(CoFinal);
+	}
+
+	let finalGrade;
+	switch (finalScore) {
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			finalGrade = 1;
+			break;
+		case 4:
+		case 5:
+		case 6:
+			finalGrade = 2;
+			break;
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+			finalGrade = 3;
+			break;
+		case 11:
+		case 12:
+		case 13:
+			finalGrade = 4;
+			break;
+		case 14:
+		case 15:
+		case 16:
+			finalGrade = 5;
+			break;
+		case 17:
+		case 18:
+		case 19:
+			finalGrade = 6;
+			break;
+		case 20:
+		case 21:
+		case 22:
+		case 23:
+		case 24:
+			finalGrade = 7;
+			break;
+		default:
+			finalGrade = null;
+	}
 
 	return (
 		<TableContainer
@@ -46,13 +129,23 @@ const IATable = () => {
 					minWidth: 700,
 					maxWidth: 1000,
 				}}
-				aria-label='spanning table'>
+				aria-label='spanning table'
+				ref={ref}>
 				<TableHead>
-					<TableCell>
-						<Typography variant='h6'>Candidate</Typography>
+					<TableCell colSpan={2}>
+						<TextField
+							label='Candidate'
+							size='large'
+							placeholder={"Name or Number"}
+							maxWidth='auto'
+						/>
 					</TableCell>
-					<TableCell colSpan={5}>
+					<TableCell colSpan={3}>
 						<Typography variant='h6'>{nameState}</Typography>
+					</TableCell>
+					<TableCell colSpan={3}>
+						Final Score: {finalScore} Final Grade:{" "}
+						{finalGrade ? finalGrade : null}
 					</TableCell>
 				</TableHead>
 				<TableBody>
@@ -78,15 +171,24 @@ const IATable = () => {
 								<Typography variant='body1'>In: {PE3state} / 2</Typography>
 							</Tooltip>
 						</TableCell>
+						<TableCell>
+							<TextField
+								label='PE Score'
+								size='small'
+								placeholder={PEAvg ? PEAvg : null}
+								value={PEFinal}
+								onChange={(event) =>
+									dispatch(updatePEFinal(event.target.value))
+								}
+							/>
+						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
 							<Typography variant='body1'>Comment</Typography>
 						</TableCell>
-						<TableCell colSpan={4}>
-							<Tooltip title='Delete'>
-								<Typography variant='body1'>{PECstate}</Typography>
-							</Tooltip>
+						<TableCell colSpan={5}>
+							<Typography variant='body1'>{PECstate}</Typography>
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -116,12 +218,23 @@ const IATable = () => {
 								<Typography variant='body1'>SEE: {Ex4state} / 6</Typography>
 							</Tooltip>
 						</TableCell>
+						<TableCell>
+							<TextField
+								label='Ex Score'
+								size='small'
+								placeholder={ExAvg ? ExAvg : null}
+								value={ExFinal}
+								onChange={(event) =>
+									dispatch(updateExFinal(event.target.value))
+								}
+							/>
+						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
 							<Typography variant='body1'>Comment</Typography>
 						</TableCell>
-						<TableCell colSpan={4}>
+						<TableCell colSpan={5}>
 							<Typography variant='body1'>{ExCstate}</Typography>
 						</TableCell>
 					</TableRow>
@@ -152,12 +265,23 @@ const IATable = () => {
 								<Typography variant='body1'>Int: {An4state} / 6</Typography>
 							</Tooltip>
 						</TableCell>
+						<TableCell>
+							<TextField
+								label='An Score'
+								size='small'
+								placeholder={AnAvg ? AnAvg : null}
+								value={AnFinal}
+								onChange={(event) =>
+									dispatch(updateAnFinal(event.target.value))
+								}
+							/>
+						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
 							<Typography variant='body1'>Comment</Typography>
 						</TableCell>
-						<TableCell colSpan={4}>
+						<TableCell colSpan={5}>
 							<Typography variant='body1'>{AnCstate}</Typography>
 						</TableCell>
 					</TableRow>
@@ -190,12 +314,23 @@ const IATable = () => {
 								</Typography>
 							</Tooltip>
 						</TableCell>
+						<TableCell>
+							<TextField
+								label='Ev Score'
+								size='small'
+								placeholder={EvAvg ? EvAvg : null}
+								value={EvFinal}
+								onChange={(event) =>
+									dispatch(updateEvFinal(event.target.value))
+								}
+							/>
+						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
 							<Typography variant='body1'>Comment</Typography>
 						</TableCell>
-						<TableCell colSpan={4}>
+						<TableCell colSpan={5}>
 							<Typography variant='body1'>{EvCstate}</Typography>
 						</TableCell>
 					</TableRow>
@@ -226,12 +361,23 @@ const IATable = () => {
 								<Typography variant='body1'>Term: {Co4state} / 4</Typography>
 							</Tooltip>
 						</TableCell>
+						<TableCell>
+							<TextField
+								label='Com Score'
+								size='small'
+								placeholder={CoAvg ? CoAvg : null}
+								value={CoFinal}
+								onChange={(event) =>
+									dispatch(updateCoFinal(event.target.value))
+								}
+							/>
+						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
 							<Typography variant='body1'>Comment</Typography>
 						</TableCell>
-						<TableCell colSpan={4}>
+						<TableCell colSpan={5}>
 							<Typography variant='body1'>{CoCstate}</Typography>
 						</TableCell>
 					</TableRow>

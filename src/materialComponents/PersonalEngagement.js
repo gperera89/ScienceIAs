@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -14,7 +13,6 @@ import {
 	updatePE3,
 	updatePEC,
 } from "../redux/scoreSlice";
-import { guidanceData, updateGuidance } from "../redux/guidanceSlice";
 
 const Input = styled(MuiInput)`
 	width: 30px;

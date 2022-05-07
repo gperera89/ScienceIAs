@@ -9,10 +9,11 @@ import Exploration from "./Exploration.js";
 import Analysis from "./Analysis.js";
 import Communication from "./Communication.js";
 import Evaluation from "./Evaluation.js";
-import Drawer from "./Drawer";
+// import Drawer from "./Drawer";
+import ReportModal from "./Modal.js";
 
 function TabPanel(props) {
-	const { children, value, index, ...other } = props;
+	const { children, value, index, renderScreenshot, ...other } = props;
 
 	return (
 		<div
@@ -49,7 +50,6 @@ export default function VerticalTabs() {
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
-
 	return (
 		<Box
 			sx={{
@@ -70,7 +70,8 @@ export default function VerticalTabs() {
 				<Tab label='Analysis' {...a11yProps(2)} />
 				<Tab label='Evaluation' {...a11yProps(3)} />
 				<Tab label='Communication' {...a11yProps(4)} />
-				<Drawer />
+				{/* <Drawer /> */}
+				<ReportModal />
 			</Tabs>
 			<TabPanel value={value} index={0}>
 				<PersonalEngagement />
