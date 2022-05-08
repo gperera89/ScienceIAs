@@ -1,8 +1,7 @@
 import { Container, CssBaseline, Paper } from "@mui/material";
 import TabPanel from "./TabPanel";
 import GuidanceBox from "./GuidanceBox";
-import Table from "./Table";
-
+import ReportModal from "./Modal";
 const MaterialApp = () => {
 	return (
 		<>
@@ -12,11 +11,12 @@ const MaterialApp = () => {
 					display: "flex",
 					alignItems: "stretch",
 				}}>
-				<Container maxWidth='md'>
+				<Container>
 					<TabPanel />
+					<ReportModal />
 				</Container>
 				<Container>
-					<Paper maxWidth='sm'>
+					<Paper>
 						<GuidanceBox />
 					</Paper>
 				</Container>

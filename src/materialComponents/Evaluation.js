@@ -221,6 +221,7 @@ export default function Evaluation() {
 			<br />
 			<TextField
 				id='outlined-multiline-flexible'
+				type='text'
 				label='Comment'
 				multiline
 				rows={3}

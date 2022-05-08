@@ -2,12 +2,16 @@ import * as React from "react";
 import { useRef } from "react";
 import { useScreenshot } from "use-screenshot-hook";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import Fab from "@mui/material/Fab";
 import Modal from "@mui/material/Modal";
 import Table from "./Table";
-import { Close } from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import { Close, TableChart } from "@mui/icons-material";
 import { ClickAwayListener } from "@mui/material";
+import Switch from "@mui/material/Switch";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Summary from "./Summary";
 
 const style = {
 	position: "absolute",
@@ -21,7 +25,7 @@ const style = {
 	p: 4,
 };
 
-export default function ReportModal() {
+function ReportModal() {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -29,9 +33,17 @@ export default function ReportModal() {
 	const { image, takeScreenshot, clear } = useScreenshot({
 		ref: imageRef,
 	});
+	const [checked, setChecked] = React.useState(true);
+
+	const handleChange = (event) => {
+		setChecked(event.target.checked);
+	};
+
 	return (
 		<div>
-			<Button onClick={handleOpen}>Open modal</Button>
+			<Fab variant='extended' color='primary' onClick={handleOpen}>
+				<TableChart sx={{ mr: 1 }} /> Open Table
+			</Fab>
 			<ClickAwayListener onClickAway={clear}>
 				<Modal
 					open={open}
@@ -39,34 +51,54 @@ export default function ReportModal() {
 					aria-labelledby='modal-modal-title'
 					aria-describedby='modal-modal-description'>
 					<Box sx={style}>
-						<Typography id='modal-modal-title' variant='h6' component='h2'>
-							Text in a modal
-						</Typography>
-						{image ? (
-							""
+						<FormGroup>
+							<FormControlLabel
+								control={
+									<Switch
+										checked={checked}
+										onChange={handleChange}
+										inputProps={{ "aria-label": "controlled" }}
+									/>
+								}
+								label={checked ? "Table" : "Summary"}
+							/>
+						</FormGroup>
+						{checked ? (
+							<Box>
+								{image ? (
+									""
+								) : (
+									<Button
+										variant='outlined'
+										onClick={() => takeScreenshot({ ref: imageRef })}>
+										Take Screenshot
+									</Button>
+								)}
+								<Box>
+									{image ? (
+										image && (
+											<div className='imageContainer'>
+												<Close onClick={clear} />
+												<img width={800} src={image} alt='screenshot' />
+											</div>
+										)
+									) : (
+										<div ref={imageRef}>
+											<Table />
+										</div>
+									)}
+								</Box>
+							</Box>
 						) : (
-							<Button onClick={() => takeScreenshot({ ref: imageRef })}>
-								Take Screenshot
-							</Button>
+							<Box>
+								<Summary />
+							</Box>
 						)}
-
-						<Box>
-							{image ? (
-								image && (
-									<div className='imageContainer'>
-										<Close onClick={clear} />
-										<img width={800} src={image} alt='screenshot' />
-									</div>
-								)
-							) : (
-								<div ref={imageRef}>
-									<Table />
-								</div>
-							)}
-						</Box>
 					</Box>
 				</Modal>
 			</ClickAwayListener>
 		</div>
 	);
 }
+
+export default ReportModal;

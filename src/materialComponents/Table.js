@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import TableHead from "@mui/material/TableHead";
 import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import {
@@ -18,7 +17,7 @@ import {
 	updateEvFinal,
 } from "../redux/scoreSlice";
 
-const IATable = ({ image, ref }) => {
+export const IATable = () => {
 	const dispatch = useDispatch();
 	const PE1state = useSelector((state) => state.score.PE1);
 	const PE2state = useSelector((state) => state.score.PE2);
@@ -124,31 +123,24 @@ const IATable = ({ image, ref }) => {
 		<TableContainer
 			component={Paper}
 			sx={{ justifyContent: "center", textAlign: "center" }}>
-			<Table
-				sx={{
-					minWidth: 700,
-					maxWidth: 1000,
-				}}
-				aria-label='spanning table'
-				ref={ref}>
-				<TableHead>
-					<TableCell colSpan={2}>
-						<TextField
-							label='Candidate'
-							size='large'
-							placeholder={"Name or Number"}
-							maxWidth='auto'
-						/>
-					</TableCell>
-					<TableCell colSpan={3}>
-						<Typography variant='h6'>{nameState}</Typography>
-					</TableCell>
-					<TableCell colSpan={3}>
-						Final Score: {finalScore} Final Grade:{" "}
-						{finalGrade ? finalGrade : null}
-					</TableCell>
-				</TableHead>
+			<Table aria-label='spanning table'>
 				<TableBody>
+					<TableRow>
+						<TableCell colSpan={2}>
+							<TextField label='Student' size='large' />
+						</TableCell>
+						<TableCell colSpan={3}>
+							<Typography variant='h6'>{nameState}</Typography>
+						</TableCell>
+						<TableCell colSpan={3}>
+							<Typography variant='h6'>Overall Score: {finalScore}</Typography>
+							<br />
+							<Typography variant='h6'>
+								Grade: {finalGrade ? finalGrade : null}
+							</Typography>
+						</TableCell>
+					</TableRow>
+
 					<TableRow>
 						<TableCell rowSpan={2}>
 							<Typography variant='subtitle1'>Personal Engagement</Typography>
@@ -158,21 +150,32 @@ const IATable = ({ image, ref }) => {
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Independent Thinking'>
-								<Typography variant='body1'>IT: {PE1state} / 2</Typography>
+								<Typography variant='body1'>
+									IT:
+									<br />
+									{PE1state} / 2
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Personal Significance'>
-								<Typography variant='body1'>PS: {PE2state} / 2</Typography>
+								<Typography variant='body1'>
+									PS: <br />
+									{PE2state} / 2
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell colSpan={2}>
 							<Tooltip title='Initiative'>
-								<Typography variant='body1'>In: {PE3state} / 2</Typography>
+								<Typography variant='body1'>
+									In: <br />
+									{PE3state} / 2
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<TextField
+								type={"number"}
 								label='PE Score'
 								size='small'
 								placeholder={PEAvg ? PEAvg : null}
@@ -183,14 +186,16 @@ const IATable = ({ image, ref }) => {
 							/>
 						</TableCell>
 					</TableRow>
-					<TableRow>
-						<TableCell>
-							<Typography variant='body1'>Comment</Typography>
-						</TableCell>
-						<TableCell colSpan={5}>
-							<Typography variant='body1'>{PECstate}</Typography>
-						</TableCell>
-					</TableRow>
+					{PECstate === "" ? null : (
+						<TableRow>
+							<TableCell>
+								<Typography variant='body1'>Comment</Typography>
+							</TableCell>
+							<TableCell colSpan={5}>
+								<Typography variant='body1'>{PECstate}</Typography>
+							</TableCell>
+						</TableRow>
+					)}
 					<TableRow>
 						<TableCell rowSpan={2}>
 							<Typography variant='subtitle1'>Exploration</Typography>
@@ -200,29 +205,42 @@ const IATable = ({ image, ref }) => {
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Research Question'>
-								<Typography variant='body1'>RQ: {Ex1state} / 6</Typography>
+								<Typography variant='body1'>
+									RQ: <br />
+									{Ex1state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Background'>
-								<Typography variant='body1'>BG: {Ex2state} / 6</Typography>
+								<Typography variant='body1'>
+									BG: <br />
+									{Ex2state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Methodology'>
-								<Typography variant='body1'>Mtd: {Ex3state} / 6</Typography>
+								<Typography variant='body1'>
+									Mtd: <br />
+									{Ex3state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Safety, Ethics and Environmental Issues'>
-								<Typography variant='body1'>SEE: {Ex4state} / 6</Typography>
+								<Typography variant='body1'>
+									SEE: <br />
+									{Ex4state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<TextField
+								type={"number"}
 								label='Ex Score'
 								size='small'
-								placeholder={ExAvg ? ExAvg : null}
+								// placeholder={ExAvg ? ExAvg : null}
 								value={ExFinal}
 								onChange={(event) =>
 									dispatch(updateExFinal(event.target.value))
@@ -247,29 +265,42 @@ const IATable = ({ image, ref }) => {
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Raw Data'>
-								<Typography variant='body1'>RD: {An1state} / 6</Typography>
+								<Typography variant='body1'>
+									RD: <br />
+									{An1state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Data Processing'>
-								<Typography variant='body1'>PD: {An2state} / 6</Typography>
+								<Typography variant='body1'>
+									PD: <br />
+									{An2state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Impact of Uncertainty'>
-								<Typography variant='body1'>Unc: {An3state} / 6</Typography>
+								<Typography variant='body1'>
+									Unc: <br />
+									{An3state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Interpretation of Processed Data'>
-								<Typography variant='body1'>Int: {An4state} / 6</Typography>
+								<Typography variant='body1'>
+									Int: <br />
+									{An4state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<TextField
+								type={"number"}
 								label='An Score'
 								size='small'
-								placeholder={AnAvg ? AnAvg : null}
+								// placeholder={AnAvg ? AnAvg : null}
 								value={AnFinal}
 								onChange={(event) =>
 									dispatch(updateAnFinal(event.target.value))
@@ -294,31 +325,42 @@ const IATable = ({ image, ref }) => {
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Conclusion'>
-								<Typography variant='body1'>Conc: {Ev1state} / 6</Typography>
+								<Typography variant='body1'>
+									Conc: <br />
+									{Ev1state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Scientific Context'>
-								<Typography variant='body1'>Sci Cxt: {Ev2state} / 6</Typography>
+								<Typography variant='body1'>
+									Sci Cxt: <br />
+									{Ev2state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Limitations'>
-								<Typography variant='body1'>Lim: {Ev3state} / 6</Typography>
+								<Typography variant='body1'>
+									Lim: <br />
+									{Ev3state} / 6
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Improvement and Extension'>
 								<Typography variant='body1'>
-									Imp & Ext: {Ev4state} / 6
+									Ext: <br />
+									{Ev4state} / 6
 								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<TextField
+								type={"number"}
 								label='Ev Score'
 								size='small'
-								placeholder={EvAvg ? EvAvg : null}
+								// placeholder={EvAvg ? EvAvg : null}
 								value={EvFinal}
 								onChange={(event) =>
 									dispatch(updateEvFinal(event.target.value))
@@ -343,29 +385,43 @@ const IATable = ({ image, ref }) => {
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Presentation'>
-								<Typography variant='body1'>Pres: {Co1state} / 4</Typography>
+								<Typography variant='body1'>
+									Pres: <br />
+									{Co1state} / 4
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Structure'>
-								<Typography variant='body1'>Struc: {Co2state} / 4</Typography>
+								<Typography variant='body1'>
+									Struc: <br />
+									{Co2state} / 4
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Focus'>
-								<Typography variant='body1'>Focus: {Co3state} / 4</Typography>
+								<Typography variant='body1'>
+									Focus: <br />
+									{Co3state} / 4
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Terminology & Conventions'>
-								<Typography variant='body1'>Term: {Co4state} / 4</Typography>
+								<Typography variant='body1'>
+									Term:
+									<br />
+									{Co4state} / 4
+								</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<TextField
+								type={"number"}
 								label='Com Score'
 								size='small'
-								placeholder={CoAvg ? CoAvg : null}
+								// placeholder={CoAvg ? CoAvg : null}
 								value={CoFinal}
 								onChange={(event) =>
 									dispatch(updateCoFinal(event.target.value))

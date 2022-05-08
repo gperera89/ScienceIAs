@@ -223,6 +223,7 @@ export default function Exploration() {
 			<TextField
 				id='outlined-multiline-flexible'
 				label='Comment'
+				type='text'
 				multiline
 				rows={3}
 				placeholder='Strengths and Weaknesses'

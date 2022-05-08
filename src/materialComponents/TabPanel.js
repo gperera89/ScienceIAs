@@ -2,14 +2,12 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import PersonalEngagement from "./PersonalEngagement.js";
 import Exploration from "./Exploration.js";
 import Analysis from "./Analysis.js";
 import Communication from "./Communication.js";
 import Evaluation from "./Evaluation.js";
-// import Drawer from "./Drawer";
 import ReportModal from "./Modal.js";
 
 function TabPanel(props) {
@@ -22,11 +20,7 @@ function TabPanel(props) {
 			id={`vertical-tabpanel-${index}`}
 			aria-labelledby={`vertical-tab-${index}`}
 			{...other}>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
+			{value === index && <Box sx={{ p: 3 }}>{children}</Box>}
 		</div>
 	);
 }
@@ -65,13 +59,11 @@ export default function VerticalTabs() {
 				onChange={handleChange}
 				aria-label='Vertical tabs example'
 				sx={{ borderRight: 1, borderColor: "divider" }}>
-				<Tab label='Personal Engagement' {...a11yProps(0)} />
-				<Tab label='Exploration' {...a11yProps(1)} />
-				<Tab label='Analysis' {...a11yProps(2)} />
-				<Tab label='Evaluation' {...a11yProps(3)} />
-				<Tab label='Communication' {...a11yProps(4)} />
-				{/* <Drawer /> */}
-				<ReportModal />
+				<Tab label='1. Personal Engagement' {...a11yProps(0)} />
+				<Tab label='2. Exploration' {...a11yProps(1)} />
+				<Tab label='3. Analysis' {...a11yProps(2)} />
+				<Tab label='4. Evaluation' {...a11yProps(3)} />
+				<Tab label='5. Communication' {...a11yProps(4)} />
 			</Tabs>
 			<TabPanel value={value} index={0}>
 				<PersonalEngagement />
