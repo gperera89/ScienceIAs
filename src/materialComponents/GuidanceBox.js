@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { updateGuidance } from "../redux/guidanceSlice";
 
@@ -552,7 +552,19 @@ const GuidanceBox = () => {
 	}, [Co4state, dispatch]);
 
 	const guidance = useSelector((state) => state.guidance.guidance);
-	return <Typography varient='body2'>{guidance}</Typography>;
+	return (
+		<Box
+			sx={{
+				bgcolor: "background.paper",
+				boxShadow: 2,
+				borderRadius: 2,
+				p: 2,
+				minWidth: 300,
+				maxWidth: 500,
+			}}>
+			<Typography varient='body2'>{guidance}</Typography>
+		</Box>
+	);
 };
 
 export default GuidanceBox;

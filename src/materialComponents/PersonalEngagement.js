@@ -12,6 +12,7 @@ import {
 	updatePE2,
 	updatePE3,
 	updatePEC,
+	updatePEFinal,
 } from "../redux/scoreSlice";
 
 const Input = styled(MuiInput)`
@@ -23,6 +24,7 @@ export default function PersonalEngagement() {
 	const PE2state = useSelector((state) => state.score.PE2);
 	const PE3state = useSelector((state) => state.score.PE3);
 	const PECstate = useSelector((state) => state.score.PEC);
+	const PEFinal = useSelector((state) => state.score.PEFinal);
 
 	const dispatch = useDispatch();
 
@@ -72,6 +74,8 @@ export default function PersonalEngagement() {
 			dispatch(updatePE3(2));
 		}
 	};
+
+	let PEAvg = Math.round((PE1state + PE2state + PE3state) / 3);
 
 	return (
 		<Box>
@@ -181,6 +185,24 @@ export default function PersonalEngagement() {
 				value={PECstate}
 				onChange={(event) => dispatch(updatePEC(event.target.value))}
 			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for PE:{" "}
+					<Input
+						value={PEFinal}
+						placeholder={PEAvg ? PEAvg : null}
+						size='small'
+						onChange={(event) => dispatch(updatePEFinal(event.target.value))}
+						inputProps={{
+							step: 1,
+							min: 0,
+							max: 2,
+							type: "number",
+							"aria-labelledby": "input-slider",
+						}}
+					/>
+				</Typography>
+			</Box>
 		</Box>
 	);
 }

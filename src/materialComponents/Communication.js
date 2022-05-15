@@ -13,6 +13,7 @@ import {
 	updateCo3,
 	updateCo4,
 	updateCoC,
+	updateCoFinal,
 } from "../redux/scoreSlice";
 
 const Input = styled(MuiInput)`
@@ -25,7 +26,9 @@ export default function Communication() {
 	const Co3state = useSelector((state) => state.score.Co3);
 	const Co4state = useSelector((state) => state.score.Co4);
 	const CoCstate = useSelector((state) => state.score.CoC);
+	const CoFinal = useSelector((state) => state.score.CoFinal);
 	const dispatch = useDispatch();
+	let CoAvg = Math.round((Co1state + Co2state + Co3state + Co4state) / 4);
 
 	const handleSliderChangeCo1 = (event, newValue) => {
 		dispatch(updateCo1(newValue));
@@ -229,6 +232,24 @@ export default function Communication() {
 				value={CoCstate}
 				onChange={(event) => dispatch(updateCoC(event.target.value))}
 			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for Communication:{" "}
+					<Input
+						value={CoFinal}
+						placeholder={CoAvg ? CoAvg : null}
+						size='small'
+						onChange={(event) => dispatch(updateCoFinal(event.target.value))}
+						inputProps={{
+							step: 1,
+							min: 0,
+							max: 4,
+							type: "number",
+							"aria-labelledby": "input-slider",
+						}}
+					/>
+				</Typography>
+			</Box>
 		</Box>
 	);
 }

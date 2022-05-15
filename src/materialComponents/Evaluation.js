@@ -13,6 +13,7 @@ import {
 	updateEv3,
 	updateEv4,
 	updateEvC,
+	updateEvFinal,
 } from "../redux/scoreSlice";
 
 const Input = styled(MuiInput)`
@@ -25,8 +26,9 @@ export default function Evaluation() {
 	const Ev3state = useSelector((state) => state.score.Ev3);
 	const Ev4state = useSelector((state) => state.score.Ev4);
 	const EvCstate = useSelector((state) => state.score.EvC);
+	const EvFinal = useSelector((state) => state.score.ExFinal);
 	const dispatch = useDispatch();
-
+	let EvAvg = Math.round((Ev1state + Ev2state + Ev3state + Ev4state) / 4);
 	const handleSliderChangeEv1 = (event, newValue) => {
 		dispatch(updateEv1(newValue));
 	};
@@ -229,6 +231,24 @@ export default function Evaluation() {
 				value={EvCstate}
 				onChange={(event) => dispatch(updateEvC(event.target.value))}
 			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for Evaluation:{" "}
+					<Input
+						value={EvFinal}
+						placeholder={EvAvg ? EvAvg : null}
+						size='small'
+						onChange={(event) => dispatch(updateEvFinal(event.target.value))}
+						inputProps={{
+							step: 1,
+							min: 0,
+							max: 6,
+							type: "number",
+							"aria-labelledby": "input-slider",
+						}}
+					/>
+				</Typography>
+			</Box>
 		</Box>
 	);
 }

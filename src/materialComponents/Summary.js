@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 const Summary = () => {
+	const [checked, setChecked] = React.useState(true);
 	const PE1state = useSelector((state) => state.score.PE1);
 	const PE2state = useSelector((state) => state.score.PE2);
 	const PE3state = useSelector((state) => state.score.PE3);
@@ -34,6 +39,81 @@ const Summary = () => {
 	const CoFinal = useSelector((state) => state.score.CoFinal);
 	const nameState = useSelector((state) => state.score.name);
 
+	let PEAvg = Math.round((PE1state + PE2state + PE3state) / 3);
+	let ExAvg = Math.round((Ex1state + Ex2state + Ex3state + Ex4state) / 4);
+	let AnAvg = Math.round((An1state + An2state + An3state + An4state) / 4);
+	let EvAvg = Math.round((Ev1state + Ev2state + Ev3state + Ev4state) / 4);
+	let CoAvg = Math.round((Co1state + Co2state + Co3state + Co4state) / 4);
+
+	let PEscore = PEFinal ? PEFinal : PEAvg;
+	let Exscore = ExFinal ? ExFinal : ExAvg;
+	let Anscore = AnFinal ? AnFinal : AnAvg;
+	let Evscore = EvFinal ? EvFinal : EvAvg;
+	let Coscore = CoFinal ? CoFinal : CoAvg;
+
+	let finalScore = null;
+	if (
+		PEscore === undefined ||
+		Exscore === undefined ||
+		Anscore === undefined ||
+		Evscore === undefined ||
+		Coscore === undefined
+	) {
+		finalScore = null;
+	} else {
+		finalScore =
+			Number(PEscore) +
+			Number(Exscore) +
+			Number(Anscore) +
+			Number(Evscore) +
+			Number(Coscore);
+	}
+
+	let finalGrade;
+	switch (finalScore) {
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			finalGrade = 1;
+			break;
+		case 4:
+		case 5:
+		case 6:
+			finalGrade = 2;
+			break;
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+			finalGrade = 3;
+			break;
+		case 11:
+		case 12:
+		case 13:
+			finalGrade = 4;
+			break;
+		case 14:
+		case 15:
+		case 16:
+			finalGrade = 5;
+			break;
+		case 17:
+		case 18:
+		case 19:
+			finalGrade = 6;
+			break;
+		case 20:
+		case 21:
+		case 22:
+		case 23:
+		case 24:
+			finalGrade = 7;
+			break;
+		default:
+			finalGrade = null;
+	}
+
 	const copyToClipboard = (e) => {
 		navigator.clipboard
 			.writeText(document.getElementById("output").innerText)
@@ -45,6 +125,11 @@ const Summary = () => {
 			});
 	};
 	const [copyButton, setCopyButton] = useState("Copy to Clipboard");
+	const [alignment, setAlignment] = React.useState("detailed");
+
+	const handleChange = (event, newAlignment) => {
+		setAlignment(newAlignment);
+	};
 
 	let reportOpening;
 	if (nameState !== undefined) {
@@ -56,7 +141,7 @@ const Summary = () => {
 	let independentThinking;
 	switch (PE1state) {
 		case 0:
-			independentThinking = `There was no evidence of personal engagement with the exploration with insufficient independent thinking, initiative or creativity. `;
+			independentThinking = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 			independentThinking = `The evidence of personal engagement with the exploration is limited with little independent thinking, initiative or creativity. `;
@@ -71,7 +156,7 @@ const Summary = () => {
 	let personalSignificance;
 	switch (PE2state) {
 		case 0:
-			personalSignificance = `There is no justification given for choosing the research question and consequently the report did not demonstrate personal significance, interest or curiosity. `;
+			personalSignificance = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 			personalSignificance = `The justification for choosing the research question and topic were limited and could not demonstrate personal significance, interest or curiosity. `;
@@ -86,7 +171,7 @@ const Summary = () => {
 	let initiative;
 	switch (PE3state) {
 		case 0:
-			initiative = `There is no evidence of personal input and initiative in the designing, implementation or presentation of the investigation. `;
+			initiative = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 			initiative = `There is some evidence of personal input and initiative in the designing, implementation or presentation of the investigation.`;
@@ -101,7 +186,7 @@ const Summary = () => {
 	let researchQuestion;
 	switch (Ex1state) {
 		case 0:
-			researchQuestion = `The topic of the investigation is wasn't identified and a research question of was not focused. `;
+			researchQuestion = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -122,7 +207,7 @@ const Summary = () => {
 	let background;
 	switch (Ex2state) {
 		case 0:
-			background = `The background information provided for the investigation is lacking significant details and largely irrelevant to the topic under investigation. `;
+			background = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -143,7 +228,7 @@ const Summary = () => {
 	let methodology;
 	switch (Ex3state) {
 		case 0:
-			methodology = `The methodology of the investigation is doesn't address the research question as it doesn't take into consideration the significant factors that may influence the relevance, reliability and sufficiency of the collected data.`;
+			methodology = `The student's report does not reach a standard described by the descriptors.`;
 			break;
 		case 1:
 		case 2:
@@ -164,7 +249,7 @@ const Summary = () => {
 	let safety;
 	switch (Ex4state) {
 		case 0:
-			safety = `The report doesn't show evidence of awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation. `;
+			safety = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -185,7 +270,7 @@ const Summary = () => {
 	let rawData;
 	switch (An1state) {
 		case 0:
-			rawData = `The report did not include relevant raw data to support a valid conclusion to the research question. `;
+			rawData = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -206,7 +291,7 @@ const Summary = () => {
 	let processedData;
 	switch (An2state) {
 		case 0:
-			processedData = `The data processing was ommitted from the report. `;
+			processedData = `TThe student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -227,7 +312,7 @@ const Summary = () => {
 	let impactOfUncertainty;
 	switch (An3state) {
 		case 0:
-			impactOfUncertainty = `The report does not show evidence of any consideration of the impact of measurement uncertainty on the analysis. `;
+			impactOfUncertainty = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -248,7 +333,7 @@ const Summary = () => {
 	let interpretationOfProcessedData;
 	switch (An4state) {
 		case 0:
-			interpretationOfProcessedData = `The processed data is was not interpreted for use in the conclusion `;
+			interpretationOfProcessedData = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -269,7 +354,7 @@ const Summary = () => {
 	let conclusion;
 	switch (Ev1state) {
 		case 0:
-			conclusion = `The report does not draw a conclusion. `;
+			conclusion = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -290,7 +375,7 @@ const Summary = () => {
 	let scientificContext;
 	switch (Ev2state) {
 		case 0:
-			scientificContext = `The conclusion makes doesn't draw any comparison to the accepted scientific context. `;
+			scientificContext = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -311,7 +396,7 @@ const Summary = () => {
 	let limitations;
 	switch (Ev3state) {
 		case 0:
-			limitations = `Strengths and weaknesses of the investigation arne't meaningfully outlined. `;
+			limitations = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -332,7 +417,7 @@ const Summary = () => {
 	let improvements;
 	switch (Ev4state) {
 		case 0:
-			improvements = `The student did not outline realistic and relevant suggestions for the improvement and extension of the investigation. `;
+			improvements = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -353,7 +438,7 @@ const Summary = () => {
 	let presentation;
 	switch (Co1state) {
 		case 0:
-			presentation = `The presentation of the investigation is unclear, making it not possible to understand the focus, process and outcomes. `;
+			presentation = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -370,7 +455,7 @@ const Summary = () => {
 	let structure;
 	switch (Co2state) {
 		case 0:
-			structure = `The report unstructured and unclear. `;
+			structure = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -387,7 +472,7 @@ const Summary = () => {
 	let focus;
 	switch (Co3state) {
 		case 0:
-			focus = `The understanding of the focus, process and outcomes of the investigation is obscured by the presence of inappropriate or irrelevant information. `;
+			focus = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -404,7 +489,7 @@ const Summary = () => {
 	let terminology;
 	switch (Co4state) {
 		case 0:
-			terminology = `The report has frequent misuse of subject specific terminology and conventions. `;
+			terminology = `The student's report does not reach a standard described by the descriptors. `;
 			break;
 		case 1:
 		case 2:
@@ -419,53 +504,167 @@ const Summary = () => {
 	}
 
 	return (
-		<div>
-			<Button variant='outlined' onClick={copyToClipboard}>
-				{copyButton}
-			</Button>
-			<div id='output'>
-				<p>{reportOpening}</p>
-				<p>
-					Throughout the report, the personal engagement scored a total of{" "}
-					{PEFinal} out of 2 points. {independentThinking}
-					{personalSignificance}
-					{initiative}
-					{PECstate}
-				</p>
-				<p>
-					In the exploration section the report scored {ExFinal} points out of
-					6. {researchQuestion}
-					{background}
-					{methodology}
-					{safety}
-					{ExCstate}
-				</p>
-				<p>
-					For the analysis, {AnFinal} points were awarded out of 6. {rawData}
-					{processedData}
-					{impactOfUncertainty}
-					{interpretationOfProcessedData}
-					{AnCstate}
-				</p>
-				<p>
-					The evaluation of the data was awarded {EvFinal} points out of 6.{" "}
-					{conclusion}
-					{scientificContext}
-					{limitations}
-					{improvements}
-					{EvCstate}
-				</p>
-				<p>
-					Finally, for the communication criterion the report was awarded{" "}
-					{CoFinal} points out of 4.
-					{presentation}
-					{structure}
-					{focus}
-					{terminology}
-					{CoCstate}
-				</p>
-			</div>
-		</div>
+		<Box>
+			<Box display='flex' justifyContent='space-between' alignItems='center'>
+				<Button variant='outlined' onClick={copyToClipboard}>
+					{copyButton}
+				</Button>
+				<ToggleButtonGroup
+					color='primary'
+					value={alignment}
+					exclusive
+					onChange={handleChange}>
+					<ToggleButton value='detailed'>Detailed</ToggleButton>
+					<ToggleButton value='simple'>Simple</ToggleButton>
+				</ToggleButtonGroup>
+			</Box>
+			<Box>
+				<div id='output'>
+					<Typography variant='h6'>{reportOpening}</Typography>
+					<Typography variant='subtitle1' fontWeight={600}>
+						<ul>
+							<li>Overall Score: {finalScore}</li>
+							<li>Overall Grade: {finalGrade}</li>
+						</ul>
+					</Typography>
+					<Typography variant='subtitle1'>
+						Score for Personal Engagement: {PEscore} out of 2 points.
+					</Typography>
+					<ul>
+						<li>
+							<strong>Independent thinking:</strong>{" "}
+							{alignment === "detailed" ? independentThinking : PE1state}
+						</li>
+						<li>
+							<strong>Personal significance:</strong>{" "}
+							{alignment === "detailed" ? personalSignificance : PE2state}
+						</li>
+						<li>
+							<strong>Initiative:</strong>{" "}
+							{alignment === "detailed" ? initiative : PE3state}
+						</li>
+						{PECstate ? (
+							<li>
+								<strong>Further comment:</strong> {PECstate}
+							</li>
+						) : null}
+					</ul>
+					<Typography variant='subtitle1'>
+						Score for Exploration: {Exscore} out of 6 points.
+					</Typography>
+
+					<ul>
+						<li>
+							<strong>Research question:</strong>{" "}
+							{alignment === "detailed" ? researchQuestion : Ex1state}
+						</li>
+						<li>
+							<strong>Background:</strong>{" "}
+							{alignment === "detailed" ? background : Ex2state}
+						</li>
+						<li>
+							<strong>Methodology:</strong>{" "}
+							{alignment === "detailed" ? methodology : Ex3state}
+						</li>
+						<li>
+							<strong>Safety, Ethics and Environmental Issues:</strong>{" "}
+							{alignment === "detailed" ? safety : Ex4state}
+						</li>
+						{ExCstate ? (
+							<li>
+								<strong>Further comment:</strong> {ExCstate}
+							</li>
+						) : null}
+					</ul>
+
+					<Typography variant='subtitle1'>
+						Score for Analysis: {Anscore} out of 6 points.
+					</Typography>
+
+					<ul>
+						<li>
+							<strong>Raw data:</strong>{" "}
+							{alignment === "detailed" ? rawData : An1state}
+						</li>
+						<li>
+							<strong>Processed Data:</strong>{" "}
+							{alignment === "detailed" ? processedData : An2state}
+						</li>
+						<li>
+							<strong>Impact of Uncertainty:</strong>{" "}
+							{alignment === "detailed" ? impactOfUncertainty : An3state}
+						</li>
+						<li>
+							<strong>Interpretation of Processed Data: </strong>
+							{alignment === "detailed"
+								? interpretationOfProcessedData
+								: An4state}
+						</li>
+						{AnCstate ? (
+							<li>
+								<strong>Further comment:</strong> {AnCstate}
+							</li>
+						) : null}
+					</ul>
+
+					<Typography variant='subtitle1'>
+						Score for Evaluation: {Evscore} out of 6 points.
+					</Typography>
+
+					<ul>
+						<li>
+							<strong>Conclusion:</strong>{" "}
+							{alignment === "detailed" ? conclusion : Ev1state}
+						</li>
+						<li>
+							<strong>Scientific Context:</strong>{" "}
+							{alignment === "detailed" ? scientificContext : Ev2state}
+						</li>
+						<li>
+							<strong>Limitations:</strong>{" "}
+							{alignment === "detailed" ? limitations : Ev3state}
+						</li>
+						<li>
+							<strong>Improvements and Extensions:</strong>{" "}
+							{alignment === "detailed" ? improvements : Ev4state}
+						</li>
+						{EvCstate ? (
+							<li>
+								<strong>Further comment:</strong> {EvCstate}
+							</li>
+						) : null}
+					</ul>
+
+					<Typography variant='subtitle1'>
+						Score for Communication: {Coscore} out of 4 points.
+					</Typography>
+
+					<ul>
+						<li>
+							<strong>Presentation:</strong>{" "}
+							{alignment === "detailed" ? presentation : Co1state}
+						</li>
+						<li>
+							<strong>Structure:</strong>{" "}
+							{alignment === "detailed" ? structure : Co2state}
+						</li>
+						<li>
+							<strong>Focus:</strong>{" "}
+							{alignment === "detailed" ? focus : Co3state}
+						</li>
+						<li>
+							<strong>Terminology and Conventions:</strong>{" "}
+							{alignment === "detailed" ? terminology : Co4state}
+						</li>
+						{CoCstate ? (
+							<li>
+								<strong>Further comment:</strong> {CoCstate}
+							</li>
+						) : null}
+					</ul>
+				</div>
+			</Box>
+		</Box>
 	);
 };
 

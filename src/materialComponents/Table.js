@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,17 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import TextField from "@mui/material/TextField";
-import {
-	updatePEFinal,
-	updateAnFinal,
-	updateCoFinal,
-	updateExFinal,
-	updateEvFinal,
-} from "../redux/scoreSlice";
 
 export const IATable = () => {
-	const dispatch = useDispatch();
 	const PE1state = useSelector((state) => state.score.PE1);
 	const PE2state = useSelector((state) => state.score.PE2);
 	const PE3state = useSelector((state) => state.score.PE3);
@@ -48,7 +39,7 @@ export const IATable = () => {
 	const AnFinal = useSelector((state) => state.score.AnFinal);
 	const EvFinal = useSelector((state) => state.score.EvFinal);
 	const CoFinal = useSelector((state) => state.score.CoFinal);
-	const nameState = useSelector((state) => state.score.name);
+	const name = useSelector((state) => state.score.name);
 
 	let PEAvg = Math.round((PE1state + PE2state + PE3state) / 3);
 	let ExAvg = Math.round((Ex1state + Ex2state + Ex3state + Ex4state) / 4);
@@ -56,22 +47,28 @@ export const IATable = () => {
 	let EvAvg = Math.round((Ev1state + Ev2state + Ev3state + Ev4state) / 4);
 	let CoAvg = Math.round((Co1state + Co2state + Co3state + Co4state) / 4);
 
+	let PEscore = PEFinal ? PEFinal : PEAvg;
+	let Exscore = ExFinal ? ExFinal : ExAvg;
+	let Anscore = AnFinal ? AnFinal : AnAvg;
+	let Evscore = EvFinal ? EvFinal : EvAvg;
+	let Coscore = CoFinal ? CoFinal : CoAvg;
+
 	let finalScore = null;
 	if (
-		PEFinal === undefined ||
-		ExFinal === undefined ||
-		AnFinal === undefined ||
-		EvFinal === undefined ||
-		CoFinal === undefined
+		PEscore === undefined ||
+		Exscore === undefined ||
+		Anscore === undefined ||
+		Evscore === undefined ||
+		Coscore === undefined
 	) {
 		finalScore = null;
 	} else {
 		finalScore =
-			Number(PEFinal) +
-			Number(ExFinal) +
-			Number(AnFinal) +
-			Number(EvFinal) +
-			Number(CoFinal);
+			Number(PEscore) +
+			Number(Exscore) +
+			Number(Anscore) +
+			Number(Evscore) +
+			Number(Coscore);
 	}
 
 	let finalGrade;
@@ -122,19 +119,19 @@ export const IATable = () => {
 	return (
 		<TableContainer
 			component={Paper}
-			sx={{ justifyContent: "center", textAlign: "center" }}>
+			sx={{ justifyContent: "center", textAlign: "center", width: "100%" }}>
 			<Table aria-label='spanning table'>
 				<TableBody>
 					<TableRow>
+						<TableCell colSpan={3}>
+							<Typography variant='h6'>{name}</Typography>
+						</TableCell>
 						<TableCell colSpan={2}>
-							<TextField label='Student' size='large' />
+							<Typography variant='h6'>
+								Overall Score: {finalScore ? finalScore : null}
+							</Typography>
 						</TableCell>
-						<TableCell colSpan={3}>
-							<Typography variant='h6'>{nameState}</Typography>
-						</TableCell>
-						<TableCell colSpan={3}>
-							<Typography variant='h6'>Overall Score: {finalScore}</Typography>
-							<br />
+						<TableCell colSpan={1}>
 							<Typography variant='h6'>
 								Grade: {finalGrade ? finalGrade : null}
 							</Typography>
@@ -142,299 +139,218 @@ export const IATable = () => {
 					</TableRow>
 
 					<TableRow>
-						<TableCell rowSpan={2}>
-							<Typography variant='subtitle1'>Personal Engagement</Typography>
+						<TableCell rowSpan={2} width={170}>
+							<Typography variant='subtitle1' fontWeight={600}>
+								Personal Engagement: {PEscore ? PEscore : null}
+							</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography variant='body1'>Strand</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Strand
+							</Typography>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Independent Thinking'>
-								<Typography variant='body1'>
-									IT:
-									<br />
-									{PE1state} / 2
-								</Typography>
+								<Typography variant='body1'>IT: {PE1state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Personal Significance'>
-								<Typography variant='body1'>
-									PS: <br />
-									{PE2state} / 2
-								</Typography>
+								<Typography variant='body1'>PS: {PE2state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell colSpan={2}>
 							<Tooltip title='Initiative'>
-								<Typography variant='body1'>
-									In: <br />
-									{PE3state} / 2
-								</Typography>
+								<Typography variant='body1'>In: {PE3state}</Typography>
 							</Tooltip>
 						</TableCell>
+					</TableRow>
+					<TableRow>
 						<TableCell>
-							<TextField
-								type={"number"}
-								label='PE Score'
-								size='small'
-								placeholder={PEAvg ? PEAvg : null}
-								value={PEFinal}
-								onChange={(event) =>
-									dispatch(updatePEFinal(event.target.value))
-								}
-							/>
+							<Typography variant='body1' fontWeight={500}>
+								Comment:
+							</Typography>
+						</TableCell>
+						<TableCell colSpan={4} sx={{ width: "auto" }}>
+							<Typography variant='body1'>
+								{PECstate ? PECstate : "None"}
+							</Typography>
 						</TableCell>
 					</TableRow>
-					{PECstate === "" ? null : (
-						<TableRow>
-							<TableCell>
-								<Typography variant='body1'>Comment</Typography>
-							</TableCell>
-							<TableCell colSpan={5}>
-								<Typography variant='body1'>{PECstate}</Typography>
-							</TableCell>
-						</TableRow>
-					)}
 					<TableRow>
 						<TableCell rowSpan={2}>
-							<Typography variant='subtitle1'>Exploration</Typography>
+							<Typography variant='subtitle1' fontWeight={600}>
+								Exploration: {Exscore ? Exscore : null}
+							</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography variant='body1'>Strand</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Strand
+							</Typography>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Research Question'>
-								<Typography variant='body1'>
-									RQ: <br />
-									{Ex1state} / 6
-								</Typography>
+								<Typography variant='body1'>RQ: {Ex1state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Background'>
-								<Typography variant='body1'>
-									BG: <br />
-									{Ex2state} / 6
-								</Typography>
+								<Typography variant='body1'>BG: {Ex2state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Methodology'>
-								<Typography variant='body1'>
-									Mtd: <br />
-									{Ex3state} / 6
-								</Typography>
+								<Typography variant='body1'>Mtd: {Ex3state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Safety, Ethics and Environmental Issues'>
-								<Typography variant='body1'>
-									SEE: <br />
-									{Ex4state} / 6
-								</Typography>
+								<Typography variant='body1'>SEE: {Ex4state}</Typography>
 							</Tooltip>
-						</TableCell>
-						<TableCell>
-							<TextField
-								type={"number"}
-								label='Ex Score'
-								size='small'
-								// placeholder={ExAvg ? ExAvg : null}
-								value={ExFinal}
-								onChange={(event) =>
-									dispatch(updateExFinal(event.target.value))
-								}
-							/>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
-							<Typography variant='body1'>Comment</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Comment:
+							</Typography>
 						</TableCell>
-						<TableCell colSpan={5}>
-							<Typography variant='body1'>{ExCstate}</Typography>
+						<TableCell colSpan={4}>
+							<Typography variant='body1'>
+								{ExCstate ? ExCstate : "None"}
+							</Typography>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell rowSpan={2}>
-							<Typography variant='subtitle1'>Analysis</Typography>
+							<Typography variant='subtitle1' fontWeight={600}>
+								Analysis: {Anscore ? Anscore : null}
+							</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography variant='body1'>Strand</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Strand
+							</Typography>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Raw Data'>
-								<Typography variant='body1'>
-									RD: <br />
-									{An1state} / 6
-								</Typography>
+								<Typography variant='body1'>RD: {An1state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Data Processing'>
-								<Typography variant='body1'>
-									PD: <br />
-									{An2state} / 6
-								</Typography>
+								<Typography variant='body1'>PD: {An2state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Impact of Uncertainty'>
-								<Typography variant='body1'>
-									Unc: <br />
-									{An3state} / 6
-								</Typography>
+								<Typography variant='body1'>Unc: {An3state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Interpretation of Processed Data'>
-								<Typography variant='body1'>
-									Int: <br />
-									{An4state} / 6
-								</Typography>
+								<Typography variant='body1'>Int: {An4state}</Typography>
 							</Tooltip>
-						</TableCell>
-						<TableCell>
-							<TextField
-								type={"number"}
-								label='An Score'
-								size='small'
-								// placeholder={AnAvg ? AnAvg : null}
-								value={AnFinal}
-								onChange={(event) =>
-									dispatch(updateAnFinal(event.target.value))
-								}
-							/>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
-							<Typography variant='body1'>Comment</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Comment:
+							</Typography>
 						</TableCell>
-						<TableCell colSpan={5}>
-							<Typography variant='body1'>{AnCstate}</Typography>
+						<TableCell colSpan={4}>
+							<Typography variant='body1'>
+								{AnCstate ? AnCstate : "None"}
+							</Typography>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell rowSpan={2}>
-							<Typography variant='subtitle1'>Evaluation</Typography>
+							<Typography variant='subtitle1' fontWeight={600}>
+								Evaluation: {Evscore ? Evscore : null}
+							</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography variant='body1'>Strand</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Strand
+							</Typography>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Conclusion'>
-								<Typography variant='body1'>
-									Conc: <br />
-									{Ev1state} / 6
-								</Typography>
+								<Typography variant='body1'>Conc: {Ev1state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Scientific Context'>
-								<Typography variant='body1'>
-									Sci Cxt: <br />
-									{Ev2state} / 6
-								</Typography>
+								<Typography variant='body1'>Sci Cxt: {Ev2state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Limitations'>
-								<Typography variant='body1'>
-									Lim: <br />
-									{Ev3state} / 6
-								</Typography>
+								<Typography variant='body1'>Lim: {Ev3state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Improvement and Extension'>
-								<Typography variant='body1'>
-									Ext: <br />
-									{Ev4state} / 6
-								</Typography>
+								<Typography variant='body1'>Ext: {Ev4state}</Typography>
 							</Tooltip>
-						</TableCell>
-						<TableCell>
-							<TextField
-								type={"number"}
-								label='Ev Score'
-								size='small'
-								// placeholder={EvAvg ? EvAvg : null}
-								value={EvFinal}
-								onChange={(event) =>
-									dispatch(updateEvFinal(event.target.value))
-								}
-							/>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
-							<Typography variant='body1'>Comment</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Comment:
+							</Typography>
 						</TableCell>
-						<TableCell colSpan={5}>
-							<Typography variant='body1'>{EvCstate}</Typography>
+						<TableCell colSpan={4}>
+							<Typography variant='body1'>
+								{EvCstate ? EvCstate : "None"}
+							</Typography>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell rowSpan={2}>
-							<Typography variant='subtitle1'>Communication</Typography>
+							<Typography variant='subtitle1' fontWeight={600}>
+								Communication: {Coscore ? Coscore : null}
+							</Typography>
 						</TableCell>
 						<TableCell>
-							<Typography variant='body1'>Strand</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Strand
+							</Typography>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Presentation'>
-								<Typography variant='body1'>
-									Pres: <br />
-									{Co1state} / 4
-								</Typography>
+								<Typography variant='body1'>Pres: {Co1state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Structure'>
-								<Typography variant='body1'>
-									Struc: <br />
-									{Co2state} / 4
-								</Typography>
+								<Typography variant='body1'>Struc: {Co2state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Focus'>
-								<Typography variant='body1'>
-									Focus: <br />
-									{Co3state} / 4
-								</Typography>
+								<Typography variant='body1'>Focus: {Co3state}</Typography>
 							</Tooltip>
 						</TableCell>
 						<TableCell>
 							<Tooltip title='Terminology & Conventions'>
-								<Typography variant='body1'>
-									Term:
-									<br />
-									{Co4state} / 4
-								</Typography>
+								<Typography variant='body1'>Term: {Co4state}</Typography>
 							</Tooltip>
-						</TableCell>
-						<TableCell>
-							<TextField
-								type={"number"}
-								label='Com Score'
-								size='small'
-								// placeholder={CoAvg ? CoAvg : null}
-								value={CoFinal}
-								onChange={(event) =>
-									dispatch(updateCoFinal(event.target.value))
-								}
-							/>
 						</TableCell>
 					</TableRow>
 					<TableRow>
 						<TableCell>
-							<Typography variant='body1'>Comment</Typography>
+							<Typography variant='body1' fontWeight={500}>
+								Comment:
+							</Typography>
 						</TableCell>
-						<TableCell colSpan={5}>
-							<Typography variant='body1'>{CoCstate}</Typography>
+						<TableCell colSpan={4}>
+							<Typography variant='body1'>
+								{CoCstate ? CoCstate : "None"}
+							</Typography>
 						</TableCell>
 					</TableRow>
 				</TableBody>

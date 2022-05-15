@@ -13,6 +13,7 @@ import {
 	updateEx3,
 	updateEx4,
 	updateExC,
+	updateExFinal,
 } from "../redux/scoreSlice";
 
 const Input = styled(MuiInput)`
@@ -25,6 +26,7 @@ export default function Exploration() {
 	const Ex3state = useSelector((state) => state.score.Ex3);
 	const Ex4state = useSelector((state) => state.score.Ex4);
 	const ExCstate = useSelector((state) => state.score.ExC);
+	const ExFinal = useSelector((state) => state.score.ExFinal);
 	const dispatch = useDispatch();
 
 	const handleSliderChangeEx1 = (event, newValue) => {
@@ -88,6 +90,8 @@ export default function Exploration() {
 			dispatch(updateEx3(6));
 		}
 	};
+
+	let ExAvg = Math.round((Ex1state + Ex2state + Ex3state + Ex4state) / 4);
 
 	return (
 		<Box>
@@ -230,6 +234,24 @@ export default function Exploration() {
 				value={ExCstate}
 				onChange={(event) => dispatch(updateExC(event.target.value))}
 			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for Exploration:{" "}
+					<Input
+						value={ExFinal}
+						placeholder={ExAvg ? ExAvg : null}
+						size='small'
+						onChange={(event) => dispatch(updateExFinal(event.target.value))}
+						inputProps={{
+							step: 1,
+							min: 0,
+							max: 6,
+							type: "number",
+							"aria-labelledby": "input-slider",
+						}}
+					/>
+				</Typography>
+			</Box>
 		</Box>
 	);
 }

@@ -13,6 +13,7 @@ import {
 	updateAn3,
 	updateAn4,
 	updateAnC,
+	updateAnFinal,
 } from "../redux/scoreSlice";
 
 const Input = styled(MuiInput)`
@@ -25,6 +26,8 @@ export default function Analysis() {
 	const An3state = useSelector((state) => state.score.An3);
 	const An4state = useSelector((state) => state.score.An4);
 	const AnCstate = useSelector((state) => state.score.AnC);
+	const AnFinal = useSelector((state) => state.score.AnFinal);
+	let AnAvg = Math.round((An1state + An2state + An3state + An4state) / 4);
 	const dispatch = useDispatch();
 
 	const handleSliderChangeAn1 = (event, newValue) => {
@@ -229,6 +232,24 @@ export default function Analysis() {
 				value={AnCstate}
 				onChange={(event) => dispatch(updateAnC(event.target.value))}
 			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for Analysis:{" "}
+					<Input
+						value={AnFinal}
+						placeholder={AnAvg ? AnAvg : null}
+						size='small'
+						onChange={(event) => dispatch(updateAnFinal(event.target.value))}
+						inputProps={{
+							step: 1,
+							min: 0,
+							max: 6,
+							type: "number",
+							"aria-labelledby": "input-slider",
+						}}
+					/>
+				</Typography>
+			</Box>
 		</Box>
 	);
 }
