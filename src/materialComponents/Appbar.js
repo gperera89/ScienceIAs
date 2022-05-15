@@ -11,9 +11,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const ResponsiveAppBar = () => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
+	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -26,10 +28,6 @@ const ResponsiveAppBar = () => {
 		setAnchorElNav(null);
 		window.open("/", "_self");
 	};
-	const handleCloseNavMenu2 = () => {
-		setAnchorElNav(null);
-		window.open("/howto", "_self");
-	};
 
 	const handleClick = () => {
 		window.open("https://github.com/gperera89/ScienceIAs");
@@ -37,7 +35,10 @@ const ResponsiveAppBar = () => {
 	return (
 		<AppBar
 			position='static'
-			sx={{ marginBottom: 2, backgroundColor: "white" }}>
+			sx={{
+				marginBottom: 2,
+				backgroundColor: prefersDarkMode ? "#051531" : "white",
+			}}>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
 					<Box
@@ -54,7 +55,7 @@ const ResponsiveAppBar = () => {
 							aria-controls='menu-appbar'
 							aria-haspopup='true'
 							onClick={handleOpenNavMenu}
-							sx={{ color: "#4682B4" }}>
+							color={"secondary"}>
 							<MenuIcon />
 						</IconButton>
 						<Menu
@@ -77,11 +78,6 @@ const ResponsiveAppBar = () => {
 							<MenuItem key={1} onClick={handleCloseNavMenu1}>
 								<Typography textAlign={"center"}>Refresh Marker</Typography>
 							</MenuItem>
-							<MenuItem key={2} onClick={handleCloseNavMenu2}>
-								<Typography textAlign={"center"} href='/howto'>
-									How To Use
-								</Typography>
-							</MenuItem>
 						</Menu>
 					</Box>
 					<Box
@@ -103,20 +99,9 @@ const ResponsiveAppBar = () => {
 								color: "white",
 								display: "block",
 							}}
-							href='/'>
+							href='/'
+							color='secondary'>
 							Refresh Marker
-						</Button>
-						<Button
-							key={2}
-							onClick={handleCloseNavMenu}
-							variant='contained'
-							sx={{
-								my: 2,
-								color: "white",
-								display: "block",
-							}}
-							href='howto'>
-							How To Use
 						</Button>
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
