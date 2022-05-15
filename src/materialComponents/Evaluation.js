@@ -99,7 +99,7 @@ export default function Evaluation() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ev1state === "number" ? Ev1state : 0}
+							value={Ev1state ? Ev1state : 0}
 							onChange={handleSliderChangeEv1}
 							aria-labelledby='input-slider'
 							marks
@@ -109,8 +109,7 @@ export default function Evaluation() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ev1state}
-							size='small'
+							value={Ev1state ? Ev1state : 0}
 							onChange={handleInputChangeEv1}
 							onBlur={handleBlurEv1}
 							inputProps={{
@@ -131,7 +130,7 @@ export default function Evaluation() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ev2state === "number" ? Ev2state : 0}
+							value={Ev2state ? Ev2state : 0}
 							onChange={handleSliderChangeEv2}
 							aria-labelledby='input-slider'
 							marks
@@ -141,7 +140,7 @@ export default function Evaluation() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ev2state}
+							value={Ev2state ? Ev2state : 0}
 							size='small'
 							onChange={handleInputChangeEv2}
 							onBlur={handleBlurEv2}
@@ -163,7 +162,7 @@ export default function Evaluation() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ev3state === "number" ? Ev3state : 0}
+							value={Ev3state ? Ev3state : 0}
 							onChange={handleSliderChangeEv3}
 							aria-labelledby='input-slider'
 							marks
@@ -173,7 +172,7 @@ export default function Evaluation() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ev3state}
+							value={Ev3state ? Ev3state : 0}
 							size='small'
 							onChange={handleInputChangeEv3}
 							onBlur={handleBlurEv3}
@@ -195,7 +194,7 @@ export default function Evaluation() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ev4state === "number" ? Ev4state : 0}
+							value={Ev4state ? Ev4state : 0}
 							onChange={handleSliderChangeEv4}
 							aria-labelledby='input-slider'
 							marks
@@ -205,7 +204,7 @@ export default function Evaluation() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ev4state}
+							value={Ev4state ? Ev4state : 0}
 							size='small'
 							onChange={handleInputChangeEv4}
 							onBlur={handleBlurEv4}
@@ -235,8 +234,8 @@ export default function Evaluation() {
 				<Typography variant='overline' sx={{ align: "right" }}>
 					Marks for Evaluation:{" "}
 					<Input
-						value={EvFinal}
-						placeholder={EvAvg ? EvAvg : null}
+						value={EvFinal ? EvFinal : ""}
+						placeholder={EvAvg ? EvAvg : ""}
 						size='small'
 						onChange={(event) => dispatch(updateEvFinal(event.target.value))}
 						inputProps={{

@@ -86,7 +86,7 @@ export default function PersonalEngagement() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof PE1state === "number" ? PE1state : 0}
+							value={PE1state ? PE1state : 0}
 							onChange={handleSliderChangePE1}
 							aria-labelledby='input-slider'
 							marks
@@ -96,7 +96,7 @@ export default function PersonalEngagement() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={PE1state}
+							value={PE1state ? PE1state : 0}
 							size='small'
 							onChange={handleInputChangePE1}
 							onBlur={handleBlurPE1}
@@ -118,7 +118,7 @@ export default function PersonalEngagement() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof PE2state === "number" ? PE2state : 0}
+							value={PE2state ? PE2state : 0}
 							onChange={handleSliderChangePE2}
 							aria-labelledby='input-slider'
 							marks
@@ -128,7 +128,7 @@ export default function PersonalEngagement() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={PE2state}
+							value={PE2state ? PE2state : 0}
 							size='small'
 							onChange={handleInputChangePE2}
 							onBlur={handleBlurPE2}
@@ -150,7 +150,7 @@ export default function PersonalEngagement() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof PE3state === "number" ? PE3state : 0}
+							value={PE3state ? PE3state : 0}
 							onChange={handleSliderChangePE3}
 							aria-labelledby='input-slider'
 							marks
@@ -160,7 +160,7 @@ export default function PersonalEngagement() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={PE3state}
+							value={PE3state ? PE3state : 0}
 							size='small'
 							onChange={handleInputChangePE3}
 							onBlur={handleBlurPE3}
@@ -187,16 +187,16 @@ export default function PersonalEngagement() {
 			/>
 			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
 				<Typography variant='overline' sx={{ align: "right" }}>
-					Marks for PE:{" "}
+					Marks for Personal Engegement:{" "}
 					<Input
-						value={PEFinal}
-						placeholder={PEAvg ? PEAvg : null}
+						value={PEFinal ? PEFinal : ""}
+						placeholder={PEAvg ? PEAvg : ""}
 						size='small'
 						onChange={(event) => dispatch(updatePEFinal(event.target.value))}
 						inputProps={{
 							step: 1,
 							min: 0,
-							max: 2,
+							max: 4,
 							type: "number",
 							"aria-labelledby": "input-slider",
 						}}

@@ -102,7 +102,7 @@ export default function Exploration() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ex1state === "number" ? Ex1state : 0}
+							value={Ex1state ? Ex1state : 0}
 							onChange={handleSliderChangeEx1}
 							aria-labelledby='input-slider'
 							marks
@@ -112,7 +112,7 @@ export default function Exploration() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ex1state}
+							value={Ex1state ? Ex1state : 0}
 							size='small'
 							onChange={handleInputChangeEx1}
 							onBlur={handleBlurEx1}
@@ -134,7 +134,7 @@ export default function Exploration() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ex2state === "number" ? Ex2state : 0}
+							value={Ex2state ? Ex2state : 0}
 							onChange={handleSliderChangeEx2}
 							aria-labelledby='input-slider'
 							marks
@@ -144,7 +144,7 @@ export default function Exploration() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ex2state}
+							value={Ex2state ? Ex2state : 0}
 							size='small'
 							onChange={handleInputChangeEx2}
 							onBlur={handleBlurEx2}
@@ -166,7 +166,7 @@ export default function Exploration() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ex3state === "number" ? Ex3state : 0}
+							value={Ex3state ? Ex3state : 0}
 							onChange={handleSliderChangeEx3}
 							aria-labelledby='input-slider'
 							marks
@@ -176,7 +176,7 @@ export default function Exploration() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ex3state}
+							value={Ex3state ? Ex3state : 0}
 							size='small'
 							onChange={handleInputChangeEx3}
 							onBlur={handleBlurEx3}
@@ -198,7 +198,7 @@ export default function Exploration() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Ex4state === "number" ? Ex4state : 0}
+							value={Ex4state ? Ex4state : 0}
 							onChange={handleSliderChangeEx4}
 							aria-labelledby='input-slider'
 							marks
@@ -208,7 +208,7 @@ export default function Exploration() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Ex4state}
+							value={Ex4state ? Ex4state : 0}
 							size='small'
 							onChange={handleInputChangeEx4}
 							onBlur={handleBlurEx4}
@@ -238,8 +238,8 @@ export default function Exploration() {
 				<Typography variant='overline' sx={{ align: "right" }}>
 					Marks for Exploration:{" "}
 					<Input
-						value={ExFinal}
-						placeholder={ExAvg ? ExAvg : null}
+						value={ExFinal ? ExFinal : ""}
+						placeholder={ExAvg ? ExAvg : ""}
 						size='small'
 						onChange={(event) => dispatch(updateExFinal(event.target.value))}
 						inputProps={{

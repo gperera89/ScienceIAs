@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateName } from "../redux/scoreSlice";
 import GuidanceBox from "./GuidanceBox.js";
 import SummaryModal from "./SummaryModal.js";
-import Button from "@mui/material/Button";
 
 function TabPanel(props) {
 	const { children, value, index, renderScreenshot, ...other } = props;

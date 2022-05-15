@@ -101,7 +101,7 @@ export default function Communication() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Co1state === "number" ? Co1state : 0}
+							value={Co1state ? Co1state : 0}
 							onChange={handleSliderChangeCo1}
 							aria-labelledby='input-slider'
 							marks
@@ -111,7 +111,7 @@ export default function Communication() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Co1state}
+							value={Co1state ? Co1state : 0}
 							size='small'
 							onChange={handleInputChangeCo1}
 							onBlur={handleBlurCo1}
@@ -133,7 +133,7 @@ export default function Communication() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Co2state === "number" ? Co2state : 0}
+							value={Co2state ? Co2state : 0}
 							onChange={handleSliderChangeCo2}
 							aria-labelledby='input-slider'
 							marks
@@ -143,7 +143,7 @@ export default function Communication() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Co2state}
+							value={Co2state ? Co2state : 0}
 							size='small'
 							onChange={handleInputChangeCo2}
 							onBlur={handleBlurCo2}
@@ -165,7 +165,7 @@ export default function Communication() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Co3state === "number" ? Co3state : 0}
+							value={Co3state ? Co3state : 0}
 							onChange={handleSliderChangeCo3}
 							aria-labelledby='input-slider'
 							marks
@@ -175,7 +175,7 @@ export default function Communication() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Co3state}
+							value={Co3state ? Co3state : 0}
 							size='small'
 							onChange={handleInputChangeCo3}
 							onBlur={handleBlurCo3}
@@ -197,7 +197,7 @@ export default function Communication() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof Co4state === "number" ? Co4state : 0}
+							value={Co4state ? Co4state : 0}
 							onChange={handleSliderChangeCo4}
 							aria-labelledby='input-slider'
 							marks
@@ -207,7 +207,7 @@ export default function Communication() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={Co4state}
+							value={Co4state ? Co4state : 0}
 							size='small'
 							onChange={handleInputChangeCo4}
 							onBlur={handleBlurCo4}
@@ -236,8 +236,8 @@ export default function Communication() {
 				<Typography variant='overline' sx={{ align: "right" }}>
 					Marks for Communication:{" "}
 					<Input
-						value={CoFinal}
-						placeholder={CoAvg ? CoAvg : null}
+						value={CoFinal ? CoFinal : ""}
+						placeholder={CoAvg ? CoAvg : ""}
 						size='small'
 						onChange={(event) => dispatch(updateCoFinal(event.target.value))}
 						inputProps={{

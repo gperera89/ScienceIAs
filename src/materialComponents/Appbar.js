@@ -44,6 +44,7 @@ const ResponsiveAppBar = () => {
 					<Box
 						sx={{
 							mr: 2,
+							my: 1,
 							display: { xs: "none", md: "flex" },
 							height: 64,
 						}}>
@@ -83,6 +84,7 @@ const ResponsiveAppBar = () => {
 					<Box
 						sx={{
 							mr: 2,
+							my: 1,
 							display: { xs: "flex", md: "none" },
 							flexGrow: 1,
 							height: 64,
@@ -106,12 +108,11 @@ const ResponsiveAppBar = () => {
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title='Open Github Repository'>
-							<IconButton sx={{ p: 0 }}>
+							<IconButton sx={{ p: 0 }} onClick={handleClick}>
 								<Avatar
 									alt='Github Repository'
 									src='/GitHub.png'
 									sx={{ bgcolor: "white" }}
-									onClick={handleClick}
 								/>
 							</IconButton>
 						</Tooltip>

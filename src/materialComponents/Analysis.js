@@ -100,7 +100,7 @@ export default function Analysis() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof An1state === "number" ? An1state : 0}
+							value={An1state ? An1state : 0}
 							onChange={handleSliderChangeAn1}
 							aria-labelledby='input-slider'
 							marks
@@ -110,7 +110,7 @@ export default function Analysis() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={An1state}
+							value={An1state ? An1state : 0}
 							size='small'
 							onChange={handleInputChangeAn1}
 							onBlur={handleBlurAn1}
@@ -132,7 +132,7 @@ export default function Analysis() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof An2state === "number" ? An2state : 0}
+							value={An2state ? An2state : 0}
 							onChange={handleSliderChangeAn2}
 							aria-labelledby='input-slider'
 							marks
@@ -142,7 +142,7 @@ export default function Analysis() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={An2state}
+							value={An2state ? An2state : 0}
 							size='small'
 							onChange={handleInputChangeAn2}
 							onBlur={handleBlurAn2}
@@ -164,7 +164,7 @@ export default function Analysis() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof An3state === "number" ? An3state : 0}
+							value={An3state ? An3state : 0}
 							onChange={handleSliderChangeAn3}
 							aria-labelledby='input-slider'
 							marks
@@ -174,7 +174,7 @@ export default function Analysis() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={An3state}
+							value={An3state ? An3state : 0}
 							size='small'
 							onChange={handleInputChangeAn3}
 							onBlur={handleBlurAn3}
@@ -196,7 +196,7 @@ export default function Analysis() {
 				<Grid container spacing={2} alignItems='center'>
 					<Grid item xs>
 						<Slider
-							value={typeof An4state === "number" ? An4state : 0}
+							value={An4state ? An4state : 0}
 							onChange={handleSliderChangeAn4}
 							aria-labelledby='input-slider'
 							marks
@@ -206,7 +206,7 @@ export default function Analysis() {
 					</Grid>
 					<Grid item>
 						<Input
-							value={An4state}
+							value={An4state ? An4state : 0}
 							size='small'
 							onChange={handleInputChangeAn4}
 							onBlur={handleBlurAn4}
@@ -236,8 +236,8 @@ export default function Analysis() {
 				<Typography variant='overline' sx={{ align: "right" }}>
 					Marks for Analysis:{" "}
 					<Input
-						value={AnFinal}
-						placeholder={AnAvg ? AnAvg : null}
+						value={AnFinal ? AnFinal : ""}
+						placeholder={AnAvg ? AnAvg : ""}
 						size='small'
 						onChange={(event) => dispatch(updateAnFinal(event.target.value))}
 						inputProps={{
