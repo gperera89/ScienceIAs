@@ -1,7 +1,28 @@
-Ideas for Building:
+# Science IA Marker
 
-A help (?) button to give guidance on how to use the app
-The score for each section rendered beside the name of the section
-A popup window to give a printable or copyable table for sending results to other teachers.
-Refactor the buttons and accordion with materialui or something else
-Make sure that the textarea inputs can only be regular expressions and not code
+![logo](public/Science-IA-Marker.png)
+
+## Description
+
+The Science IA Marker is a tool to assist Science teachers assess and moderate the IB Internal Assessment for the Group 4 Sciences.
+
+The app will will take in input which address the criteria of the Internal Assessment and will output a total score, grade in a table or text summary.
+
+## Techologies
+
+Projects is created with:
+
+- React (MUI V5)
+- Redux Toolkit
+- React-Router
+- use-screenshot-hook (https://github.com/fayeed/use-screenshot)
+
+## Demos and Examples of Use
+
+### Controlling Inputs:
+
+![Gif of Inputs](github/Inputs.gif)
+
+### Controlling Outputs:
+
+![Gif of outputs](github/Output.gif)
