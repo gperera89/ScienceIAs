@@ -2,7 +2,7 @@ import * as React from "react";
 import { Container, CssBaseline } from "@mui/material";
 import TabPanel from "./TabPanel";
 import ResponsiveAppBar from "./Appbar";
-import HowToUse from "./HowToUse";
+import Contact from "./Contact";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -37,22 +37,8 @@ const App = () => {
 						alignItems: "stretch",
 					}}>
 					<Routes>
-						<Route
-							path='/'
-							element={
-								<Container className='marker'>
-									<TabPanel />
-								</Container>
-							}
-						/>
-						<Route
-							path='howto'
-							element={
-								<Container className='how-to'>
-									<HowToUse />
-								</Container>
-							}
-						/>
+						<Route path='/' element={<TabPanel />} />
+						<Route path='/contact' element={<Contact />} />
 					</Routes>
 				</Container>
 			</BrowserRouter>

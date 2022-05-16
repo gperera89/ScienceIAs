@@ -7,7 +7,6 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 const Summary = () => {
-	const [checked, setChecked] = React.useState(true);
 	const PE1state = useSelector((state) => state.score.PE1);
 	const PE2state = useSelector((state) => state.score.PE2);
 	const PE3state = useSelector((state) => state.score.PE3);
@@ -523,12 +522,13 @@ const Summary = () => {
 					<Typography variant='h6'>{reportOpening}</Typography>
 					<Typography variant='subtitle1' fontWeight={600}>
 						<ul>
-							<li>Overall Score: {finalScore}</li>
+							<li>Overall Score: {finalScore ? finalScore : null}</li>
 							<li>Overall Grade: {finalGrade}</li>
 						</ul>
 					</Typography>
 					<Typography variant='subtitle1'>
-						Score for Personal Engagement: {PEscore} out of 2 points.
+						Score for Personal Engagement:{" "}
+						{PEscore ? `${PEscore} out of 2 points.` : null}
 					</Typography>
 					<ul>
 						<li>
@@ -550,7 +550,8 @@ const Summary = () => {
 						) : null}
 					</ul>
 					<Typography variant='subtitle1'>
-						Score for Exploration: {Exscore} out of 6 points.
+						Score for Exploration:{" "}
+						{Exscore ? `${Exscore} out of 6 points.` : null}
 					</Typography>
 
 					<ul>
@@ -578,7 +579,7 @@ const Summary = () => {
 					</ul>
 
 					<Typography variant='subtitle1'>
-						Score for Analysis: {Anscore} out of 6 points.
+						Score for Analysis: {Anscore ? `${Anscore} out of 6 points.` : null}
 					</Typography>
 
 					<ul>
@@ -608,7 +609,8 @@ const Summary = () => {
 					</ul>
 
 					<Typography variant='subtitle1'>
-						Score for Evaluation: {Evscore} out of 6 points.
+						Score for Evaluation:{" "}
+						{Evscore ? `${Evscore} out of 6 points.` : null}
 					</Typography>
 
 					<ul>
@@ -636,7 +638,8 @@ const Summary = () => {
 					</ul>
 
 					<Typography variant='subtitle1'>
-						Score for Communication: {Coscore} out of 4 points.
+						Score for Communication:{" "}
+						{Coscore ? `${Coscore} out of 4 points.` : null}
 					</Typography>
 
 					<ul>
