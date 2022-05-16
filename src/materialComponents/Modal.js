@@ -1,13 +1,14 @@
-import * as React from "react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useScreenshot } from "use-screenshot-hook";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import Modal from "@mui/material/Modal";
 import Table from "./Table";
 import Button from "@mui/material/Button";
-import { Close, TableChart } from "@mui/icons-material";
-import { ClickAwayListener, Typography } from "@mui/material";
+import Close from "@mui/icons-material/Close";
+import TableChart from "@mui/icons-material/TableChart";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Typography from "@mui/material/Typography";
 
 const style = {
 	position: "absolute",

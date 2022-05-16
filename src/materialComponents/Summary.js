@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/system/Box";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import guidanceData from "./guidanceData";
 
 const Summary = () => {
 	const PE1state = useSelector((state) => state.score.PE1);
@@ -140,13 +141,13 @@ const Summary = () => {
 	let independentThinking;
 	switch (PE1state) {
 		case 0:
-			independentThinking = `The student's report does not reach a standard described by the descriptors. `;
+			independentThinking = guidanceData.zero;
 			break;
 		case 1:
-			independentThinking = `The evidence of personal engagement with the exploration is limited with little independent thinking, initiative or creativity. `;
+			independentThinking = guidanceData.pe1Low;
 			break;
 		case 2:
-			independentThinking = `The evidence of personal engagement with the exploration is clear with significant independent thinking, initiative or creativity. `;
+			independentThinking = guidanceData.pe1Med;
 			break;
 		default:
 			independentThinking = "";
@@ -155,13 +156,13 @@ const Summary = () => {
 	let personalSignificance;
 	switch (PE2state) {
 		case 0:
-			personalSignificance = `The student's report does not reach a standard described by the descriptors. `;
+			personalSignificance = guidanceData.zero;
 			break;
 		case 1:
-			personalSignificance = `The justification for choosing the research question and topic were limited and could not demonstrate personal significance, interest or curiosity. `;
+			personalSignificance = guidanceData.pe2Low;
 			break;
 		case 2:
-			personalSignificance = `The justification given for choosing the research question and the topic under investigation demonstrated clear personal significance, interest and curiosity. `;
+			personalSignificance = guidanceData.pe2Med;
 			break;
 		default:
 			personalSignificance = "";
@@ -170,13 +171,13 @@ const Summary = () => {
 	let initiative;
 	switch (PE3state) {
 		case 0:
-			initiative = `The student's report does not reach a standard described by the descriptors. `;
+			initiative = guidanceData.zero;
 			break;
 		case 1:
-			initiative = `There is some evidence of personal input and initiative in the designing, implementation or presentation of the investigation.`;
+			initiative = guidanceData.pe3Low;
 			break;
 		case 2:
-			initiative = `There is clear evidence of personal input and initiative in the designing, implementation or presentation of the investigation.`;
+			initiative = guidanceData.pe3Med;
 			break;
 		default:
 			initiative = "";
@@ -185,19 +186,19 @@ const Summary = () => {
 	let researchQuestion;
 	switch (Ex1state) {
 		case 0:
-			researchQuestion = `The student's report does not reach a standard described by the descriptors. `;
+			researchQuestion = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			researchQuestion = `The topic of the investigation is identified and a research question of some relevance is stated but it is not focused. `;
+			researchQuestion = guidanceData.ex1Low;
 			break;
 		case 3:
 		case 4:
-			researchQuestion = `The topic of the investigation is identified and a relevant but not fully focused research question is described. `;
+			researchQuestion = guidanceData.ex1Med;
 			break;
 		case 5:
 		case 6:
-			researchQuestion = `The topic of the investigation is identified and a relevant and fully focused research question is clearly described. `;
+			researchQuestion = guidanceData.ex1High;
 			break;
 		default:
 			researchQuestion = "";
@@ -206,19 +207,19 @@ const Summary = () => {
 	let background;
 	switch (Ex2state) {
 		case 0:
-			background = `The student's report does not reach a standard described by the descriptors. `;
+			background = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			background = `The background information provided for the investigation is superficial or of limited relevance and does not aid the understanding of the context of the investigation. `;
+			background = guidanceData.ex2Low;
 			break;
 		case 3:
 		case 4:
-			background = `The background information provided for the investigation is mainly appropriate and relevant and aids the understanding of the context of the investigation. `;
+			background = guidanceData.ex2Med;
 			break;
 		case 5:
 		case 6:
-			background = `The background information provided for the investigation is entirely appropriate and relevant and enhances the understanding of the context of the investigation. `;
+			background = guidanceData.ex2High;
 			break;
 		default:
 			background = "";
@@ -227,19 +228,19 @@ const Summary = () => {
 	let methodology;
 	switch (Ex3state) {
 		case 0:
-			methodology = `The student's report does not reach a standard described by the descriptors.`;
+			methodology = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			methodology = `The methodology of the investigation is only appropriate to address the research question to a very limited extent since it takes into consideration few of the significant factors that may influence the relevance, reliability and sufficiency of the collected data. `;
+			methodology = guidanceData.ex3Low;
 			break;
 		case 3:
 		case 4:
-			methodology = `The methodology of the investigation is mainly appropriate to address the research question but has limitations since it takes into consideration only some of the significant factors that may influence the relevance, reliability and sufficiency of the collected data. `;
+			methodology = guidanceData.ex3Med;
 			break;
 		case 5:
 		case 6:
-			methodology = `The methodology of the investigation is highly appropriate to address the research question because it takes into consideration all, or nearly all, of the significant factors that may influence the relevance, reliability and sufficiency of the collected data. `;
+			methodology = guidanceData.ex3High;
 			break;
 		default:
 			methodology = "";
@@ -248,19 +249,19 @@ const Summary = () => {
 	let safety;
 	switch (Ex4state) {
 		case 0:
-			safety = `The student's report does not reach a standard described by the descriptors. `;
+			safety = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			safety = `The report shows evidence of limited awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation. `;
+			safety = guidanceData.ex4Low;
 			break;
 		case 3:
 		case 4:
-			safety = `The report shows evidence of some awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation `;
+			safety = guidanceData.ex4Med;
 			break;
 		case 5:
 		case 6:
-			safety = `The report shows evidence of full awareness of the significant safety, ethical or environmental issues that are relevant to the methodology of the investigation. `;
+			safety = guidanceData.ex4High;
 			break;
 		default:
 			safety = "";
@@ -269,19 +270,19 @@ const Summary = () => {
 	let rawData;
 	switch (An1state) {
 		case 0:
-			rawData = `The student's report does not reach a standard described by the descriptors. `;
+			rawData = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			rawData = `The report includes insufficient relevant raw data to support a valid conclusion to the research question. `;
+			rawData = guidanceData.an1Low;
 			break;
 		case 3:
 		case 4:
-			rawData = `The report includes relevant but incomplete quantitative and qualitative raw data that could support a simple or partially valid conclusion to the research question `;
+			rawData = guidanceData.an1Med;
 			break;
 		case 5:
 		case 6:
-			rawData = `The report includes sufficient relevant quantitative and qualitative raw data that could support a detailed and valid conclusion to the research question. `;
+			rawData = guidanceData.an1High;
 			break;
 		default:
 			rawData = "";
@@ -290,19 +291,19 @@ const Summary = () => {
 	let processedData;
 	switch (An2state) {
 		case 0:
-			processedData = `TThe student's report does not reach a standard described by the descriptors. `;
+			processedData = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			processedData = `Some basic data processing is carried out but is either too inaccurate or too insufficient to lead to a valid conclusion.`;
+			processedData = guidanceData.an2Low;
 			break;
 		case 3:
 		case 4:
-			processedData = `Appropriate and sufficient data processing is carried out that could lead to a broadly valid conclusion but there are significant inaccuracies and inconsistencies in the processing. `;
+			processedData = guidanceData.an2Med;
 			break;
 		case 5:
 		case 6:
-			processedData = `Appropriate and sufficient data processing is carried out with the accuracy required to enable a conclusion to the research question to be drawn that isfully consistent with the experimental data. `;
+			processedData = guidanceData.an2High;
 			break;
 		default:
 			processedData = "";
@@ -311,19 +312,19 @@ const Summary = () => {
 	let impactOfUncertainty;
 	switch (An3state) {
 		case 0:
-			impactOfUncertainty = `The student's report does not reach a standard described by the descriptors. `;
+			impactOfUncertainty = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			impactOfUncertainty = `The report shows evidence of little consideration of the impact of measurement uncertainty on the analysis. `;
+			impactOfUncertainty = guidanceData.an3Low;
 			break;
 		case 3:
 		case 4:
-			impactOfUncertainty = `The report shows evidence of some consideration of the impact of measurement uncertainty on the analysis. `;
+			impactOfUncertainty = guidanceData.an3Med;
 			break;
 		case 5:
 		case 6:
-			impactOfUncertainty = `The report shows evidence of full and appropriate consideration of the impact of measurement uncertainty on the analysis. `;
+			impactOfUncertainty = guidanceData.an3High;
 			break;
 		default:
 			impactOfUncertainty = "";
@@ -332,19 +333,19 @@ const Summary = () => {
 	let interpretationOfProcessedData;
 	switch (An4state) {
 		case 0:
-			interpretationOfProcessedData = `The student's report does not reach a standard described by the descriptors. `;
+			interpretationOfProcessedData = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			interpretationOfProcessedData = `The processed data is incorrectly or insufficiently interpreted so that the conclusion is invalid or very incomplete. `;
+			interpretationOfProcessedData = guidanceData.an4Low;
 			break;
 		case 3:
 		case 4:
-			interpretationOfProcessedData = `The processed data is interpreted so that a broadly valid but incomplete or limited conclusion to the research question can be deduced. `;
+			interpretationOfProcessedData = guidanceData.an4Med;
 			break;
 		case 5:
 		case 6:
-			interpretationOfProcessedData = `The processed data is correctly interpreted so that a completely valid and detailed conclusion to the research question can be deduced. `;
+			interpretationOfProcessedData = guidanceData.an4High;
 			break;
 		default:
 			interpretationOfProcessedData = "";
@@ -353,19 +354,19 @@ const Summary = () => {
 	let conclusion;
 	switch (Ev1state) {
 		case 0:
-			conclusion = `The student's report does not reach a standard described by the descriptors. `;
+			conclusion = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			conclusion = `A conclusion is outlined which is not relevant to the research question or is not supported by the data presented. `;
+			conclusion = guidanceData.ev1Low;
 			break;
 		case 3:
 		case 4:
-			conclusion = `A conclusion is described which is relevant to the research question and supported by the data presented. `;
+			conclusion = guidanceData.ev1Med;
 			break;
 		case 5:
 		case 6:
-			conclusion = `A detailed conclusion is described and justified which is entirely relevant to the research question and fully supported by the data presented. `;
+			conclusion = guidanceData.ev1High;
 			break;
 		default:
 			conclusion = "";
@@ -374,19 +375,19 @@ const Summary = () => {
 	let scientificContext;
 	switch (Ev2state) {
 		case 0:
-			scientificContext = `The student's report does not reach a standard described by the descriptors. `;
+			scientificContext = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			scientificContext = `The conclusion makes superficial comparison to the accepted scientific context. `;
+			scientificContext = guidanceData.ev2Low;
 			break;
 		case 3:
 		case 4:
-			scientificContext = `A conclusion is described which makes some relevant comparison to the accepted scientific context. `;
+			scientificContext = guidanceData.ev2Med;
 			break;
 		case 5:
 		case 6:
-			scientificContext = `A conclusion is correctly described and justified through relevant comparison to the accepted scientific context. `;
+			scientificContext = guidanceData.ev2High;
 			break;
 		default:
 			scientificContext = "";
@@ -395,19 +396,19 @@ const Summary = () => {
 	let limitations;
 	switch (Ev3state) {
 		case 0:
-			limitations = `The student's report does not reach a standard described by the descriptors. `;
+			limitations = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			limitations = `Strengths and weaknesses of the investigation, such as limitations of the data and sources of error, are outlined but are restricted to an account of the practical or procedural issues faced. `;
+			limitations = guidanceData.ev3Low;
 			break;
 		case 3:
 		case 4:
-			limitations = `Strengths and weaknesses of the investigation, such as limitations of the data and sources of error, are described and provide evidence of some awareness of the methodological issues involved in establishing the conclusion. `;
+			limitations = guidanceData.ev3Med;
 			break;
 		case 5:
 		case 6:
-			limitations = `Strengths and weaknesses of the investigation, such as limitations of the data and sources of error, are discussed and provide evidence of a clear understanding of the methodological issues involved in establishing the conclusion. `;
+			limitations = guidanceData.ev3High;
 			break;
 		default:
 			limitations = "";
@@ -416,19 +417,19 @@ const Summary = () => {
 	let improvements;
 	switch (Ev4state) {
 		case 0:
-			improvements = `The student's report does not reach a standard described by the descriptors. `;
+			improvements = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			improvements = `The student has outlined very few realistic and relevant suggestions for the improvement and extension of the investigation. `;
+			improvements = guidanceData.ev4Low;
 			break;
 		case 3:
 		case 4:
-			improvements = `The student has described some realistic and relevant suggestions for the improvement and extension of the investigation. `;
+			improvements = guidanceData.ev4Med;
 			break;
 		case 5:
 		case 6:
-			improvements = `The student has discussed realistic and relevant suggestions for the improvement and extension of the investigation. `;
+			improvements = guidanceData.ev4High;
 			break;
 		default:
 			improvements = "";
@@ -437,15 +438,15 @@ const Summary = () => {
 	let presentation;
 	switch (Co1state) {
 		case 0:
-			presentation = `The student's report does not reach a standard described by the descriptors. `;
+			presentation = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			presentation = `The presentation of the investigation is unclear, making it difficult to understand the focus, process and outcomes. `;
+			presentation = guidanceData.co1Low;
 			break;
 		case 3:
 		case 4:
-			presentation = `The presentation of the investigation is clear. Any errors do not hamper understanding of the focus, process and outcomes. `;
+			presentation = guidanceData.co1Med;
 			break;
 		default:
 			presentation = "";
@@ -454,15 +455,15 @@ const Summary = () => {
 	let structure;
 	switch (Co2state) {
 		case 0:
-			structure = `The student's report does not reach a standard described by the descriptors. `;
+			structure = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			structure = `The report is not well structured and is unclear: the necessary information on focus, process and outcomes is missing or is presented in an incoherent or disorganized way. `;
+			structure = guidanceData.co2Low;
 			break;
 		case 3:
 		case 4:
-			structure = `The report is well structured and clear: the necessary information on focus, process and outcomes is present and presented in a coherent way. `;
+			structure = guidanceData.co2Med;
 			break;
 		default:
 			structure = "";
@@ -471,15 +472,15 @@ const Summary = () => {
 	let focus;
 	switch (Co3state) {
 		case 0:
-			focus = `The student's report does not reach a standard described by the descriptors. `;
+			focus = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			focus = `The understanding of the focus, process and outcomes of the investigation is obscured by the presence of inappropriate or irrelevant information. `;
+			focus = guidanceData.co3Low;
 			break;
 		case 3:
 		case 4:
-			focus = `The report is relevant and concise thereby facilitating a ready understanding of the focus, process and outcomes of the investigation. `;
+			focus = guidanceData.co3Med;
 			break;
 		default:
 			focus = "";
@@ -488,15 +489,15 @@ const Summary = () => {
 	let terminology;
 	switch (Co4state) {
 		case 0:
-			terminology = `The student's report does not reach a standard described by the descriptors. `;
+			terminology = guidanceData.zero;
 			break;
 		case 1:
 		case 2:
-			terminology = `There are many errors in the use of subject specific terminology and conventions. `;
+			terminology = guidanceData.co4Low;
 			break;
 		case 3:
 		case 4:
-			terminology = `The use of subject specific terminology and conventions is appropriate and correct. Any errors do not hamper understanding. `;
+			terminology = guidanceData.co4Med;
 			break;
 		default:
 			terminology = "";

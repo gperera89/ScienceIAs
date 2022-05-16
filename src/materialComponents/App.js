@@ -1,11 +1,12 @@
-import * as React from "react";
-import { Container, CssBaseline } from "@mui/material";
+import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TabPanel from "./TabPanel";
 import ResponsiveAppBar from "./Appbar";
 import Contact from "./Contact";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from "@mui/material";
 
 const App = () => {
 	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -16,7 +17,7 @@ const App = () => {
 				palette: {
 					mode: prefersDarkMode ? "dark" : "light",
 					primary: {
-						main: "#0047AB",
+						main: prefersDarkMode ? "#008080" : "#0047AB",
 					},
 					secondary: {
 						main: "#4781B4",

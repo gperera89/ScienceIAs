@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -32,7 +32,7 @@ const ResponsiveAppBar = () => {
 			position='static'
 			sx={{
 				marginBottom: 2,
-				backgroundColor: prefersDarkMode ? "#051531" : "white",
+				backgroundColor: prefersDarkMode ? "#000000" : "white",
 			}}>
 			<Container maxWidth='xl'>
 				<Toolbar
@@ -67,7 +67,7 @@ const ResponsiveAppBar = () => {
 							<MenuItem key={1} onClick={handleCloseNavMenu1}>
 								<Typography textAlign={"center"}>IA Marker</Typography>
 							</MenuItem>
-							<MenuItem key={1} onClick={handleCloseNavMenu}>
+							<MenuItem key={2} onClick={handleCloseNavMenu}>
 								<Typography textAlign={"center"}>Contact</Typography>
 							</MenuItem>
 						</Menu>

@@ -1,8 +1,9 @@
-import { Box, Typography, Grid, Button } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
 const Contact = () => {
 	return (

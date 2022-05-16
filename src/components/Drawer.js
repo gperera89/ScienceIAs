@@ -1,18 +1,17 @@
-import * as React from "react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useScreenshot } from "use-screenshot-hook";
 import { Global } from "@emotion/react";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Table from "./Table";
+import Table from "../materialComponents/Table";
 import { flexbox } from "@mui/system";
 import { Close } from "@mui/icons-material";
 // import { useDispatch } from "react-redux";
-import ReportModal from "./Modal";
+import ReportModal from "../materialComponents/Modal";
 
 const StyledBox = styled(Box)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
