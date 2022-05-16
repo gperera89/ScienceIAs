@@ -1,224 +1,252 @@
-import React, { useEffect, useRef } from "react";
-import Button from "./Button";
-import "./Criteria.css";
+import React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Slider from "@mui/material/Slider";
+import MuiInput from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	updateCo1,
 	updateCo2,
 	updateCo3,
+	updateCo4,
 	updateCoC,
+	updateCoFinal,
 } from "../redux/scoreSlice";
-import { giveGuidance } from "../redux/guidanceSlice";
 
-const Communication = () => {
+const Input = styled(MuiInput)`
+	width: 30px;
+`;
+
+export default function Communication() {
 	const Co1state = useSelector((state) => state.score.Co1);
 	const Co2state = useSelector((state) => state.score.Co2);
 	const Co3state = useSelector((state) => state.score.Co3);
+	const Co4state = useSelector((state) => state.score.Co4);
 	const CoCstate = useSelector((state) => state.score.CoC);
+	const CoFinal = useSelector((state) => state.score.CoFinal);
 	const dispatch = useDispatch();
-	const isMounted = useRef(false);
+	let CoAvg = Math.round((Co1state + Co2state + Co3state + Co4state) / 4);
 
-	//Relevance and Concise
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (Co1state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"The report is not well structured and is unclear: the necessary information on focus, process and outcomes is missing or is presented in an incoherent or disorganized way";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"The report is well structured and clear: the necessary information on focus, process and outcomes is present and presented in a coherent way. ";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
-		}
-	}, [Co1state, dispatch]);
+	const handleSliderChangeCo1 = (event, newValue) => {
+		dispatch(updateCo1(newValue));
+	};
+	const handleSliderChangeCo2 = (event, newValue) => {
+		dispatch(updateCo2(newValue));
+	};
+	const handleSliderChangeCo3 = (event, newValue) => {
+		dispatch(updateCo3(newValue));
+	};
+	const handleSliderChangeCo4 = (event, newValue) => {
+		dispatch(updateCo4(newValue));
+	};
+	const handleInputChangeCo1 = (event) => {
+		dispatch(
+			updateCo1(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
+	const handleInputChangeCo2 = (event) => {
+		dispatch(
+			updateCo2(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
+	const handleInputChangeCo3 = (event) => {
+		dispatch(
+			updateCo3(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
+	const handleInputChangeCo4 = (event) => {
+		dispatch(
+			updateCo4(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
 
-	//Focus, Processes and Outcomes
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (Co2state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"The understanding of the focus, process and outcomes of the investigation is obscured by the presence of inappropriate or irrelevant information";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"The report is relevant and concise thereby facilitating a ready understanding of the focus, process and outcomes of the investigation. ";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
+	const handleBlurCo1 = () => {
+		if (Co1state < 0) {
+			dispatch(updateCo1(0));
+		} else if (Co1state > 4) {
+			dispatch(updateCo1(4));
 		}
-	}, [Co2state, dispatch]);
-
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (Co3state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"There are many errors in the use of subject-specific terminology and conventions.";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"The use of subject-specific terminology and conventions is appropriate and correct. Any errors do not hamper understanding.";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
+	};
+	const handleBlurCo2 = () => {
+		if (Co2state < 0) {
+			dispatch(updateCo2(0));
+		} else if (Co2state > 4) {
+			dispatch(updateCo2(4));
 		}
-	}, [Co3state, dispatch]);
+	};
+	const handleBlurCo3 = () => {
+		if (Co3state < 0) {
+			dispatch(updateCo3(0));
+		} else if (Co3state > 4) {
+			dispatch(updateCo3(4));
+		}
+	};
+	const handleBlurCo4 = () => {
+		if (Co4state < 0) {
+			dispatch(updateCo4(0));
+		} else if (Co4state > 4) {
+			dispatch(updateCo4(4));
+		}
+	};
 
 	return (
-		<>
-			<div className='criteria struc'>
-				<p>Report Structure</p>
-				<Button
-					onClick={() => dispatch(updateCo1(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo1(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo1(2))}
-					type='button'
-					className='btn yellow'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo1(3))}
-					type='button'
-					className='btn green'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo1(4))}
-					type='button'
-					className='btn teal'>
-					4
-				</Button>
-			</div>
+		<Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Presentation
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={Co1state ? Co1state : 0}
+							onChange={handleSliderChangeCo1}
+							aria-labelledby='input-slider'
+							marks
+							max={4}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={Co1state ? Co1state : 0}
+							size='small'
+							onChange={handleInputChangeCo1}
+							onBlur={handleBlurCo1}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 4,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Structure
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={Co2state ? Co2state : 0}
+							onChange={handleSliderChangeCo2}
+							aria-labelledby='input-slider'
+							marks
+							max={4}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={Co2state ? Co2state : 0}
+							size='small'
+							onChange={handleInputChangeCo2}
+							onBlur={handleBlurCo2}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 4,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Focus
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={Co3state ? Co3state : 0}
+							onChange={handleSliderChangeCo3}
+							aria-labelledby='input-slider'
+							marks
+							max={4}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={Co3state ? Co3state : 0}
+							size='small'
+							onChange={handleInputChangeCo3}
+							onBlur={handleBlurCo3}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 4,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Terminology & Conventions
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={Co4state ? Co4state : 0}
+							onChange={handleSliderChangeCo4}
+							aria-labelledby='input-slider'
+							marks
+							max={4}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={Co4state ? Co4state : 0}
+							size='small'
+							onChange={handleInputChangeCo4}
+							onBlur={handleBlurCo4}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 4,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
 			<br />
-			<div className='criteria rel'>
-				<p>Relevance and Conciseness</p>
-				<Button
-					onClick={() => dispatch(updateCo2(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo2(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo2(2))}
-					type='button'
-					className='btn yellow'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo2(3))}
-					type='button'
-					className='btn green'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo2(4))}
-					type='button'
-					className='btn teal'>
-					4
-				</Button>
-			</div>
-			<br />
-			<div className='criteria sst'>
-				<p>Subject-speicific Terminology and Conventions</p>
-				<Button
-					onClick={() => dispatch(updateCo3(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo3(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo3(2))}
-					type='button'
-					className='btn yellow'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo3(3))}
-					type='button'
-					className='btn green'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateCo3(4))}
-					type='button'
-					className='btn teal'>
-					4
-				</Button>
-			</div>
-			<br />
-			<div className=' criteria comment'>
-				<p>Additional Comment</p>
-				<textarea
-					type='text-area'
-					placeholder='Strengths and limitations...'
-					value={CoCstate}
-					onChange={(event) => dispatch(updateCoC(event.target.value))}
-				/>
-			</div>
-			<p>
-				Co1: {Co1state}, Co2: {Co2state}, Co3: {Co3state}, Comment: {CoCstate}
-			</p>
-		</>
+			<TextField
+				id='outlined-multiline-flexible'
+				label='Comment'
+				multiline
+				rows={3}
+				placeholder='Strengths and Weaknesses'
+				value={CoCstate}
+				onChange={(event) => dispatch(updateCoC(event.target.value))}
+			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for Communication:{" "}
+					<input
+						value={CoFinal ? CoFinal : ""}
+						placeholder={CoAvg ? CoAvg : ""}
+						size='small'
+						onChange={(event) => dispatch(updateCoFinal(event.target.value))}
+						step='1'
+						min='0'
+						max='4'
+						type='number'
+					/>
+				</Typography>
+			</Box>
+		</Box>
 	);
-};
-
-export default Communication;
+}

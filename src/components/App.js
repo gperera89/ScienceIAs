@@ -1,38 +1,49 @@
 import React from "react";
-import Accordion from "./Accordion";
-import PersonalEngagement from "./PersonalEngagement";
-import Exploration from "./Exploration";
-import Analysis from "./Analysis";
-import Evaluation from "./Evaluation";
-import Communication from "./Communication";
-import { useSelector } from "react-redux";
-
-import "../style.css";
+import { createTheme, ThemeProvider } from "@mui/material";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TabPanel from "./TabPanel";
+import ResponsiveAppBar from "./Appbar";
+import Contact from "./Contact";
 
 const App = () => {
-	const guidance = useSelector((state) => state.guidance.guidance);
+	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+	const theme = React.useMemo(
+		() =>
+			createTheme({
+				palette: {
+					mode: prefersDarkMode ? "dark" : "light",
+					primary: {
+						main: prefersDarkMode ? "#008080" : "#0047AB",
+					},
+					secondary: {
+						main: "#4781B4",
+					},
+				},
+			}),
+		[prefersDarkMode]
+	);
 
 	return (
-		<>
-			<div className='header'>
-				<h1 className='heading'>
-					IB Sciences <br /> Internal Assessment <br /> Marking Tool
-				</h1>
-				<div className='guidance'>
-					<p>{guidance}</p>
-				</div>
-			</div>
-			<div className='accordion-section'>
-				<Accordion
-					title='Personal Engagement'
-					content={<PersonalEngagement />}
-				/>
-				<Accordion title='Exploration' content={<Exploration />} />
-				<Accordion title='Analysis' content={<Analysis />} />
-				<Accordion title='Evaluation and Conclusion' content={<Evaluation />} />
-				<Accordion title='Communication' content={<Communication />} />
-			</div>
-		</>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<ResponsiveAppBar />
+			<BrowserRouter>
+				<Container
+					sx={{
+						display: "flex",
+						alignItems: "stretch",
+					}}>
+					<Routes>
+						<Route path='/' element={<TabPanel />} />
+						<Route path='/contact' element={<Contact />} />
+					</Routes>
+				</Container>
+			</BrowserRouter>
+		</ThemeProvider>
 	);
 };
 

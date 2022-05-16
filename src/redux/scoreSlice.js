@@ -25,6 +25,12 @@ const initialState = {
 	Co3: 0,
 	Co4: 0,
 	CoC: "",
+	name: "",
+	PEFinal: null,
+	ExFinal: null,
+	AnFinal: null,
+	EvFinal: null,
+	CoFinal: null,
 };
 
 export const scoreSlice = createSlice({
@@ -163,10 +169,52 @@ export const scoreSlice = createSlice({
 				Co3: action.payload,
 			};
 		},
+		updateCo4: (state, action) => {
+			return {
+				...state,
+				Co4: action.payload,
+			};
+		},
 		updateCoC: (state, action) => {
 			return {
 				...state,
 				CoC: action.payload,
+			};
+		},
+		updateName: (state, action) => {
+			return {
+				...state,
+				name: action.payload,
+			};
+		},
+		updatePEFinal: (state, action) => {
+			return {
+				...state,
+				PEFinal: action.payload,
+			};
+		},
+		updateExFinal: (state, action) => {
+			return {
+				...state,
+				ExFinal: action.payload,
+			};
+		},
+		updateAnFinal: (state, action) => {
+			return {
+				...state,
+				AnFinal: action.payload,
+			};
+		},
+		updateEvFinal: (state, action) => {
+			return {
+				...state,
+				EvFinal: action.payload,
+			};
+		},
+		updateCoFinal: (state, action) => {
+			return {
+				...state,
+				CoFinal: action.payload,
 			};
 		},
 	},
@@ -195,6 +243,13 @@ export const {
 	updateCo1,
 	updateCo2,
 	updateCo3,
+	updateCo4,
 	updateCoC,
+	updateName,
+	updatePEFinal,
+	updateExFinal,
+	updateAnFinal,
+	updateEvFinal,
+	updateCoFinal,
 } = scoreSlice.actions;
 export default scoreSlice.reducer;
