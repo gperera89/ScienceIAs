@@ -26,7 +26,7 @@ export default function Evaluation() {
 	const Ev3state = useSelector((state) => state.score.Ev3);
 	const Ev4state = useSelector((state) => state.score.Ev4);
 	const EvCstate = useSelector((state) => state.score.EvC);
-	const EvFinal = useSelector((state) => state.score.ExFinal);
+	const EvFinal = useSelector((state) => state.score.EvFinal);
 	const dispatch = useDispatch();
 	let EvAvg = Math.round((Ev1state + Ev2state + Ev3state + Ev4state) / 4);
 	const handleSliderChangeEv1 = (event, newValue) => {
@@ -233,18 +233,14 @@ export default function Evaluation() {
 			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
 				<Typography variant='overline' sx={{ align: "right" }}>
 					Marks for Evaluation:{" "}
-					<Input
+					<input
 						value={EvFinal ? EvFinal : ""}
 						placeholder={EvAvg ? EvAvg : ""}
-						size='small'
 						onChange={(event) => dispatch(updateEvFinal(event.target.value))}
-						inputProps={{
-							step: 1,
-							min: 0,
-							max: 6,
-							type: "number",
-							"aria-labelledby": "input-slider",
-						}}
+						step='1'
+						min='0'
+						max='6'
+						type='number'
 					/>
 				</Typography>
 			</Box>

@@ -187,19 +187,15 @@ export default function PersonalEngagement() {
 			/>
 			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
 				<Typography variant='overline' sx={{ align: "right" }}>
-					Marks for Personal Engegement:{" "}
-					<Input
+					Marks for PE:{" "}
+					<input
 						value={PEFinal ? PEFinal : ""}
 						placeholder={PEAvg ? PEAvg : ""}
-						size='small'
 						onChange={(event) => dispatch(updatePEFinal(event.target.value))}
-						inputProps={{
-							step: 1,
-							min: 0,
-							max: 4,
-							type: "number",
-							"aria-labelledby": "input-slider",
-						}}
+						step='1'
+						min='0'
+						max='2'
+						type='number'
 					/>
 				</Typography>
 			</Box>

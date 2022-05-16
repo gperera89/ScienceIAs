@@ -237,18 +237,14 @@ export default function Exploration() {
 			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
 				<Typography variant='overline' sx={{ align: "right" }}>
 					Marks for Exploration:{" "}
-					<Input
+					<input
 						value={ExFinal ? ExFinal : ""}
 						placeholder={ExAvg ? ExAvg : ""}
-						size='small'
 						onChange={(event) => dispatch(updateExFinal(event.target.value))}
-						inputProps={{
-							step: 1,
-							min: 0,
-							max: 6,
-							type: "number",
-							"aria-labelledby": "input-slider",
-						}}
+						step='1'
+						min='0'
+						max='6'
+						type='number'
 					/>
 				</Typography>
 			</Box>

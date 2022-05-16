@@ -35,7 +35,7 @@ function ReportModal() {
 	});
 
 	return (
-		<div>
+		<div style={{ marginBottom: "10px" }}>
 			<Fab variant='extended' color='primary' onClick={handleOpen}>
 				<TableChart sx={{ mr: 1 }} /> Export as Table
 			</Fab>

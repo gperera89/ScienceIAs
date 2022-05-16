@@ -95,7 +95,6 @@ export default function VerticalTabs() {
 							alignItems='center'
 							sx={{ flexDirection: "column" }}>
 							<ReportModal />
-							<br />
 							<SummaryModal />
 						</Box>
 					</Tabs>
