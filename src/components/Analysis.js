@@ -1,6 +1,11 @@
-import React, { useEffect, useRef } from "react";
-import Button from "./Button";
-import "./Criteria.css";
+import React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Slider from "@mui/material/Slider";
+import MuiInput from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	updateAn1,
@@ -8,346 +13,239 @@ import {
 	updateAn3,
 	updateAn4,
 	updateAnC,
+	updateAnFinal,
 } from "../redux/scoreSlice";
-import { giveGuidance } from "../redux/guidanceSlice";
 
-const Analysis = () => {
+const Input = styled(MuiInput)`
+	width: 30px;
+`;
+
+export default function Analysis() {
 	const An1state = useSelector((state) => state.score.An1);
 	const An2state = useSelector((state) => state.score.An2);
 	const An3state = useSelector((state) => state.score.An3);
 	const An4state = useSelector((state) => state.score.An4);
 	const AnCstate = useSelector((state) => state.score.AnC);
+	const AnFinal = useSelector((state) => state.score.AnFinal);
+	let AnAvg = Math.round((An1state + An2state + An3state + An4state) / 4);
 	const dispatch = useDispatch();
-	const isMounted = useRef(false);
 
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (An1state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"The report includes insufficient relevant raw data to support a valid conclusion to the research question.";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"The report includes relevant but incomplete quantitative and qualitative raw data that could support a simple or partially valid conclusion to the research question";
-					break;
-				case 5:
-				case 6:
-					statement =
-						"The report includes sufficient relevant quantitative and qualitative raw data that could support a detailed and valid conclusion to the research question.";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
-		}
-	}, [An1state, dispatch]);
+	const handleSliderChangeAn1 = (event, newValue) => {
+		dispatch(updateAn1(newValue));
+	};
+	const handleSliderChangeAn2 = (event, newValue) => {
+		dispatch(updateAn2(newValue));
+	};
+	const handleSliderChangeAn3 = (event, newValue) => {
+		dispatch(updateAn3(newValue));
+	};
+	const handleSliderChangeAn4 = (event, newValue) => {
+		dispatch(updateAn4(newValue));
+	};
+	const handleInputChangeAn1 = (event) => {
+		dispatch(
+			updateAn1(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
+	const handleInputChangeAn2 = (event) => {
+		dispatch(
+			updateAn2(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
+	const handleInputChangeAn3 = (event) => {
+		dispatch(
+			updateAn3(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
+	const handleInputChangeAn4 = (event) => {
+		dispatch(
+			updateAn4(event.target.value === "" ? "" : Number(event.target.value))
+		);
+	};
 
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (An2state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"Some basic data processing is carried out but is either too inaccurate or too insufficient to lead to a valid conclusion.";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"Appropriate and sufficient data processing is carried out that could lead to a broadly valid conclusion but there are significant inaccuracies and inconsistencies in the processing.";
-					break;
-				case 5:
-				case 6:
-					statement =
-						"Appropriate and sufficient data processing is carried out with the accuracy required to enable a conclusion to the research question to be drawn that is fully consistent with the experimental data.";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
+	const handleBlurAn1 = () => {
+		if (An1state < 0) {
+			dispatch(updateAn1(0));
+		} else if (An1state > 6) {
+			dispatch(updateAn1(6));
 		}
-	}, [An2state, dispatch]);
-
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (An3state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"The report shows evidence of little consideration of the impact of measurement uncertainty on the analysis.";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"The report shows evidence of some consideration of the impact of measurement uncertainty on the analysis.";
-					break;
-				case 5:
-				case 6:
-					statement =
-						"The report shows evidence of full and appropriate consideration of the impact of measurement uncertainty on the analysis.";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
+	};
+	const handleBlurAn2 = () => {
+		if (An2state < 0) {
+			dispatch(updateAn2(0));
+		} else if (An2state > 6) {
+			dispatch(updateAn2(6));
 		}
-	}, [An3state, dispatch]);
-
-	useEffect(() => {
-		if (isMounted.current) {
-			let statement;
-			switch (An4state) {
-				case 0:
-					statement =
-						"The student's report does not reach a standard described by the descriptors below.";
-					break;
-				case 1:
-				case 2:
-					statement =
-						"The processed data is incorrectly or insufficiently interpreted so that the conclusion is invalid or very incomplete.";
-					break;
-				case 3:
-				case 4:
-					statement =
-						"The processed data is interpreted so that a broadly valid but incomplete or limited conclusion to the research question can be deduced.";
-					break;
-				case 5:
-				case 6:
-					statement =
-						"The processed data is correctly interpreted so that a completely valid and detailed conclusion to the research question can be deduced.";
-					break;
-				default:
-					statement = "";
-			}
-			dispatch(giveGuidance(statement));
-		} else {
-			isMounted.current = true;
+	};
+	const handleBlurAn3 = () => {
+		if (An3state < 0) {
+			dispatch(updateAn3(0));
+		} else if (An3state > 6) {
+			dispatch(updateAn3(6));
 		}
-	}, [An4state, dispatch]);
+	};
+	const handleBlurAn4 = () => {
+		if (An4state < 0) {
+			dispatch(updateAn3(0));
+		} else if (An4state > 6) {
+			dispatch(updateAn3(6));
+		}
+	};
 	return (
-		<>
-			<div className='criteria rd'>
-				<p>Raw Data</p>
-				<Button
-					onClick={() => dispatch(updateAn1(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn1(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn1(2))}
-					type='button'
-					className='btn orange'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn1(3))}
-					type='button'
-					className='btn yellow'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn1(4))}
-					type='button'
-					className='btn chartreuse'>
-					4
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn1(5))}
-					type='button'
-					className='btn green'>
-					5
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn1(6))}
-					type='button'
-					className='btn teal'>
-					6
-				</Button>
-			</div>
+		<Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Raw Data
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={An1state ? An1state : 0}
+							onChange={handleSliderChangeAn1}
+							aria-labelledby='input-slider'
+							marks
+							max={6}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={An1state ? An1state : 0}
+							size='small'
+							onChange={handleInputChangeAn1}
+							onBlur={handleBlurAn1}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 6,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Data Processing
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={An2state ? An2state : 0}
+							onChange={handleSliderChangeAn2}
+							aria-labelledby='input-slider'
+							marks
+							max={6}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={An2state ? An2state : 0}
+							size='small'
+							onChange={handleInputChangeAn2}
+							onBlur={handleBlurAn2}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 6,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Impact of Uncertainty
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={An3state ? An3state : 0}
+							onChange={handleSliderChangeAn3}
+							aria-labelledby='input-slider'
+							marks
+							max={6}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={An3state ? An3state : 0}
+							size='small'
+							onChange={handleInputChangeAn3}
+							onBlur={handleBlurAn3}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 6,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
+			<Box sx={{ width: 250 }}>
+				<Typography id='input-slider' gutterBottom>
+					Interpretation of Processed Data
+				</Typography>
+				<Grid container spacing={2} alignItems='center'>
+					<Grid item xs>
+						<Slider
+							value={An4state ? An4state : 0}
+							onChange={handleSliderChangeAn4}
+							aria-labelledby='input-slider'
+							marks
+							max={6}
+							min={0}
+						/>
+					</Grid>
+					<Grid item>
+						<Input
+							value={An4state ? An4state : 0}
+							size='small'
+							onChange={handleInputChangeAn4}
+							onBlur={handleBlurAn4}
+							inputProps={{
+								step: 1,
+								min: 0,
+								max: 6,
+								type: "number",
+								"aria-labelledby": "input-slider",
+							}}
+						/>
+					</Grid>
+				</Grid>
+			</Box>
 			<br />
-			<div className='criteria pd'>
-				<p>Processed Data</p>
-				<Button
-					onClick={() => dispatch(updateAn2(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn2(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn2(2))}
-					type='button'
-					className='btn orange'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn2(3))}
-					type='button'
-					className='btn yellow'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn2(4))}
-					type='button'
-					className='btn chartreuse'>
-					4
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn2(5))}
-					type='button'
-					className='btn green'>
-					5
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn2(6))}
-					type='button'
-					className='btn teal'>
-					6
-				</Button>
-			</div>
-			<br />
-			<div className='criteria uncertainties'>
-				<p>Impact of Uncertainties</p>
-				<Button
-					onClick={() => dispatch(updateAn3(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn3(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn3(2))}
-					type='button'
-					className='btn orange'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn3(3))}
-					type='button'
-					className='btn yellow'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn3(4))}
-					type='button'
-					className='btn chartreuse'>
-					4
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn3(5))}
-					type='button'
-					className='btn green'>
-					5
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn3(6))}
-					type='button'
-					className='btn teal'>
-					6
-				</Button>
-			</div>
-			<br />
-			<div className='criteria interpretation'>
-				<p>Interpretation of Processed Data</p>
-				<Button
-					onClick={() => dispatch(updateAn4(0))}
-					type='button'
-					className='btn primary'>
-					0
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn4(1))}
-					type='button'
-					className='btn red'>
-					1
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn4(2))}
-					type='button'
-					className='btn orange'>
-					2
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn4(3))}
-					type='button'
-					className='btn yellow'>
-					3
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn4(4))}
-					type='button'
-					className='btn chartreuse'>
-					4
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn4(5))}
-					type='button'
-					className='btn green'>
-					5
-				</Button>
-				<Button
-					onClick={() => dispatch(updateAn4(6))}
-					type='button'
-					className='btn teal'>
-					6
-				</Button>
-			</div>
-			<br />
-			<div className=' criteria comment'>
-				<p>Additional Comment</p>
-				<textarea
-					type='text-area'
-					placeholder='Strengths and limitations...'
-					value={AnCstate}
-					onChange={(event) => dispatch(updateAnC(event.target.value))}
-				/>
-			</div>
-			<p>
-				An1: {An1state}, An2: {An2state}, An3: {An3state}, A4: {An4state},
-				Comment: {AnCstate}
-			</p>
-		</>
+			<TextField
+				id='outlined-multiline-flexible'
+				label='Comment'
+				type='text'
+				multiline
+				rows={3}
+				placeholder='Strengths and Weaknesses'
+				value={AnCstate}
+				onChange={(event) => dispatch(updateAnC(event.target.value))}
+			/>
+			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
+				<Typography variant='overline' sx={{ align: "right" }}>
+					Marks for Analysis:{" "}
+					<input
+						value={AnFinal ? AnFinal : ""}
+						placeholder={AnAvg ? AnAvg : ""}
+						onChange={(event) => dispatch(updateAnFinal(event.target.value))}
+						step='1'
+						min='0'
+						max='6'
+						type='number'
+					/>
+				</Typography>
+			</Box>
+		</Box>
 	);
-};
-
-export default Analysis;
+}
