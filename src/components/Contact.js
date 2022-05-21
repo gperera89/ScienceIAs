@@ -25,7 +25,12 @@ const Contact = () => {
 				justifyContent='center'
 				alignItems='center'>
 				<Grid item>
-					<img src='memoji.jpeg' alt='a man behind a computer' width={240} />
+					<img
+						src='memoji.jpeg'
+						alt='a man behind a computer'
+						width='240px'
+						height='240px'
+					/>
 				</Grid>
 				<Grid item justifyContent='center' alignItems='center'>
 					<Typography variant='h6' textAlign={"center"} color={"primary"}>
