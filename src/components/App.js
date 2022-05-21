@@ -36,7 +36,7 @@ const App = () => {
 					sx={{
 						display: "flex",
 						alignItems: "stretch",
-						marginX: "0.51rem",
+						// marginX: "0.51rem",
 					}}>
 					<Routes>
 						<Route path='/' element={<TabPanel />} />
