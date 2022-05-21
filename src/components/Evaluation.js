@@ -237,6 +237,7 @@ export default function Evaluation() {
 						value={EvFinal ? EvFinal : ""}
 						placeholder={EvAvg ? EvAvg : ""}
 						onChange={(event) => dispatch(updateEvFinal(event.target.value))}
+						label='evaluation-total-score'
 						step='1'
 						min='0'
 						max='6'

@@ -41,6 +41,7 @@ const ResponsiveAppBar = () => {
 					<Box sx={{ flexGrow: 1, display: "flex" }}>
 						<IconButton
 							size='large'
+							aria-label='menu-appbar'
 							aria-controls='menu-appbar'
 							aria-haspopup='true'
 							onClick={handleOpenNavMenu}
@@ -83,6 +84,10 @@ const ResponsiveAppBar = () => {
 						<img
 							src='/Science-IA-Marker.png'
 							alt='logo'
+							rel='preload'
+							as='image'
+							width='142.3px'
+							height='64px'
 							onClick={handleCloseNavMenu1}
 						/>
 					</Box>

@@ -240,6 +240,7 @@ export default function Communication() {
 						placeholder={CoAvg ? CoAvg : ""}
 						size='small'
 						onChange={(event) => dispatch(updateCoFinal(event.target.value))}
+						label='communication-total-score'
 						step='1'
 						min='0'
 						max='4'

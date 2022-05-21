@@ -88,7 +88,7 @@ export default function PersonalEngagement() {
 						<Slider
 							value={PE1state ? PE1state : 0}
 							onChange={handleSliderChangePE1}
-							aria-labelledby='input-slider'
+							aria-labelledby='input-slider-personal-engagement'
 							marks
 							max={2}
 							min={0}
@@ -105,7 +105,7 @@ export default function PersonalEngagement() {
 								min: 0,
 								max: 2,
 								type: "number",
-								"aria-labelledby": "input-slider",
+								"aria-labelledby": "input-number-personal-engagement",
 							}}
 						/>
 					</Grid>
@@ -120,7 +120,7 @@ export default function PersonalEngagement() {
 						<Slider
 							value={PE2state ? PE2state : 0}
 							onChange={handleSliderChangePE2}
-							aria-labelledby='input-slider'
+							aria-labelledby='input-slider-personal-significance'
 							marks
 							max={2}
 							min={0}
@@ -137,7 +137,7 @@ export default function PersonalEngagement() {
 								min: 0,
 								max: 2,
 								type: "number",
-								"aria-labelledby": "input-slider",
+								"aria-labelledby": "input-number-personal-significance",
 							}}
 						/>
 					</Grid>
@@ -152,7 +152,7 @@ export default function PersonalEngagement() {
 						<Slider
 							value={PE3state ? PE3state : 0}
 							onChange={handleSliderChangePE3}
-							aria-labelledby='input-slider'
+							aria-labelledby='input-slider-initiative'
 							marks
 							max={2}
 							min={0}
@@ -169,7 +169,7 @@ export default function PersonalEngagement() {
 								min: 0,
 								max: 2,
 								type: "number",
-								"aria-labelledby": "input-slider",
+								"aria-labelledby": "input-number-initiative",
 							}}
 						/>
 					</Grid>
@@ -190,6 +190,7 @@ export default function PersonalEngagement() {
 					Marks for PE:{" "}
 					<input
 						value={PEFinal ? PEFinal : ""}
+						label='PE-total-score'
 						placeholder={PEAvg ? PEAvg : ""}
 						onChange={(event) => dispatch(updatePEFinal(event.target.value))}
 						step='1'

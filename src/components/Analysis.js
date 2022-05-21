@@ -239,6 +239,7 @@ export default function Analysis() {
 						value={AnFinal ? AnFinal : ""}
 						placeholder={AnAvg ? AnAvg : ""}
 						onChange={(event) => dispatch(updateAnFinal(event.target.value))}
+						label='Analysis-total-score'
 						step='1'
 						min='0'
 						max='6'
