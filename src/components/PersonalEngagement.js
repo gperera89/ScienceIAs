@@ -79,7 +79,7 @@ export default function PersonalEngagement() {
 
 	return (
 		<Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Independent Thinking
 				</Typography>
@@ -111,7 +111,7 @@ export default function PersonalEngagement() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Personal Significance
 				</Typography>
@@ -143,7 +143,7 @@ export default function PersonalEngagement() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Initiative
 				</Typography>

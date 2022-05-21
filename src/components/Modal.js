@@ -9,6 +9,8 @@ import Close from "@mui/icons-material/Close";
 import TableChart from "@mui/icons-material/TableChart";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const style = {
 	position: "absolute",
@@ -33,11 +35,13 @@ function ReportModal() {
 	const { image, takeScreenshot, clear } = useScreenshot({
 		ref: imageRef,
 	});
-
+	const theme = useTheme();
+	const mobile = useMediaQuery(theme.breakpoints.down("sm"));
+	const tablet = useMediaQuery(theme.breakpoints.down("md"));
 	return (
 		<div style={{ marginBottom: "10px" }}>
 			<Fab variant='extended' color='primary' onClick={handleOpen}>
-				<TableChart sx={{ mr: 1 }} /> Export as Table
+				<TableChart sx={{ mr: 1 }} /> {mobile ? "Table" : "Export as Table"}
 			</Fab>
 			<ClickAwayListener onClickAway={clear}>
 				<Modal
@@ -49,7 +53,9 @@ function ReportModal() {
 						<Box>
 							{image ? (
 								<Typography>
-									Right click on image and then Save Image As..
+									{tablet
+										? `Long press and "Save Image"`
+										: `Right click on image and then Save Image As..`}
 								</Typography>
 							) : (
 								<Button

@@ -95,7 +95,7 @@ export default function Exploration() {
 
 	return (
 		<Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Research Question
 				</Typography>
@@ -127,7 +127,7 @@ export default function Exploration() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Background
 				</Typography>
@@ -159,7 +159,7 @@ export default function Exploration() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Methodology
 				</Typography>
@@ -191,7 +191,7 @@ export default function Exploration() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Safety, Ethics and Environmental Issues
 				</Typography>
@@ -240,7 +240,7 @@ export default function Exploration() {
 					<input
 						value={ExFinal ? ExFinal : ""}
 						placeholder={ExAvg ? ExAvg : ""}
-						label='exploration-total-score'
+						label='exp-total-score'
 						onChange={(event) => dispatch(updateExFinal(event.target.value))}
 						step='1'
 						min='0'

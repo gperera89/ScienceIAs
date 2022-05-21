@@ -4,6 +4,8 @@ import Fab from "@mui/material/Fab";
 import Modal from "@mui/material/Modal";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import Summary from "./Summary";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const style = {
 	position: "absolute",
@@ -24,11 +26,13 @@ function SummaryModal() {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	const theme = useTheme();
+	const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
 	return (
 		<div>
 			<Fab variant='extended' color='primary' onClick={handleOpen}>
-				<TextSnippetIcon sx={{ mr: 1 }} /> Export as Text
+				<TextSnippetIcon sx={{ mr: 1 }} /> {mobile ? "Text" : "Export as Text"}
 			</Fab>
 			<Modal
 				open={open}

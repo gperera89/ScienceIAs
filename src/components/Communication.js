@@ -15,6 +15,8 @@ import {
 	updateCoC,
 	updateCoFinal,
 } from "../redux/scoreSlice";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Input = styled(MuiInput)`
 	width: 30px;
@@ -91,10 +93,11 @@ export default function Communication() {
 			dispatch(updateCo4(4));
 		}
 	};
-
+	const theme = useTheme();
+	const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Presentation
 				</Typography>
@@ -126,7 +129,7 @@ export default function Communication() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Structure
 				</Typography>
@@ -158,7 +161,7 @@ export default function Communication() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Focus
 				</Typography>
@@ -190,7 +193,7 @@ export default function Communication() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Terminology & Conventions
 				</Typography>
@@ -234,7 +237,7 @@ export default function Communication() {
 			/>
 			<Box m={1} display='flex' justifyContent='flex-end' alignItems='flex-end'>
 				<Typography variant='overline' sx={{ align: "right" }}>
-					Marks for Communication:{" "}
+					{mobile ? `Marks for Comm: ` : `Marks for Communication: `}
 					<input
 						value={CoFinal ? CoFinal : ""}
 						placeholder={CoAvg ? CoAvg : ""}

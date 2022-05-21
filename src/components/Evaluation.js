@@ -92,7 +92,7 @@ export default function Evaluation() {
 	};
 	return (
 		<Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Conclusion
 				</Typography>
@@ -123,7 +123,7 @@ export default function Evaluation() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Scientific Context
 				</Typography>
@@ -155,7 +155,7 @@ export default function Evaluation() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Limitations
 				</Typography>
@@ -187,7 +187,7 @@ export default function Evaluation() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Improvement and Extension
 				</Typography>

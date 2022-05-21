@@ -15,7 +15,7 @@ const Contact = () => {
 				justifyContent='center'
 				alignItems='center'>
 				<Grid item>
-					<Typography variant='h2'>Contact</Typography>
+					<Typography variant='h5'>Contact</Typography>
 				</Grid>
 			</Grid>
 			<Grid
@@ -33,14 +33,21 @@ const Contact = () => {
 					/>
 				</Grid>
 				<Grid item justifyContent='center' alignItems='center'>
-					<Typography variant='h6' textAlign={"center"} color={"primary"}>
+					<Typography
+						variant='subtitle1'
+						textAlign={"center"}
+						color={"primary"}>
 						Science IA Marker is made by a Biology and Chemistry teacher
 						currently working at an international school in Shanghai, China.{" "}
 						<br />
 						If you have any questions or suggestions for improvements, please
 						reach out.
 					</Typography>
-					<Box display='flex' justifyContent='center' alignItems='center'>
+					<Box
+						display='flex'
+						justifyContent='center'
+						alignItems='center'
+						marginTop={1}>
 						<TwitterIcon
 							fontSize='large'
 							sx={{ color: "#1E9BF0" }}

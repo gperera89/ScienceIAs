@@ -15,9 +15,11 @@ import { updateName } from "../redux/scoreSlice";
 import GuidanceBox from "./GuidanceBox.js";
 import SummaryModal from "./SummaryModal.js";
 import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function TabPanel(props) {
-	const { children, value, index, renderScreenshot, ...other } = props;
+	const { children, value, index, ...other } = props;
 
 	return (
 		<div
@@ -51,6 +53,10 @@ export default function VerticalTabs() {
 		setValue(newValue);
 	};
 	const name = useSelector((state) => state.score.name);
+	const theme = useTheme();
+	const mobile = useMediaQuery(theme.breakpoints.down("sm"));
+	const tablet = useMediaQuery(theme.breakpoints.down("md"));
+
 	return (
 		<Container>
 			<Box
@@ -58,13 +64,12 @@ export default function VerticalTabs() {
 				justifyContent='center'
 				alignItems='center'
 				sx={{ flexDirection: "column" }}>
-				<Box display={"flex"} alignItems={"center"} sx={{ marginBottom: 2 }}>
+				<Box display={"flex"} alignItems={"center"} marginBottom={1}>
 					<TextField
 						maxRows={1}
 						placeholder={"Student Name or Candidate Number"}
-						autoFocus={true}
 						size={"small"}
-						sx={{ width: "25rem" }}
+						sx={{ width: "19rem" }}
 						value={name}
 						onChange={(event) => dispatch(updateName(event.target.value))}
 					/>
@@ -84,11 +89,20 @@ export default function VerticalTabs() {
 						onChange={handleChange}
 						aria-label='Vertical tabs example'
 						sx={{ borderRight: 1, borderColor: "divider" }}>
-						<Tab label='1. Personal Engagement' {...a11yProps(0)} />
-						<Tab label='2. Exploration' {...a11yProps(1)} />
-						<Tab label='3. Analysis' {...a11yProps(2)} />
-						<Tab label='4. Evaluation' {...a11yProps(3)} />
-						<Tab label='5. Communication' {...a11yProps(4)} />
+						<Tab
+							label={mobile ? "1. PE" : "1. Personal Engagement"}
+							{...a11yProps(0)}
+						/>
+						<Tab
+							label={mobile ? "2. Ex" : "2. Exploration"}
+							{...a11yProps(1)}
+						/>
+						<Tab label={mobile ? "3. An" : "3. Analysis"} {...a11yProps(2)} />
+						<Tab label={mobile ? "4. Ev" : "4. Evaluation"} {...a11yProps(3)} />
+						<Tab
+							label={mobile ? "5. Co" : "5. Communication"}
+							{...a11yProps(4)}
+						/>
 						<Box
 							display='flex'
 							justifyContent='center'
@@ -114,7 +128,9 @@ export default function VerticalTabs() {
 						<Communication />
 					</TabPanel>
 				</Box>
-				<GuidanceBox />
+				<Box marginTop={tablet ? 9 : 1}>
+					<GuidanceBox />
+				</Box>
 			</Box>
 		</Container>
 	);

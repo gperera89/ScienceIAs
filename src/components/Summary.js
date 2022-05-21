@@ -6,6 +6,8 @@ import Box from "@mui/system/Box";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import guidanceData from "./guidanceData";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Summary = () => {
 	const PE1state = useSelector((state) => state.score.PE1);
@@ -120,7 +122,7 @@ const Summary = () => {
 			.then(function () {
 				setCopyButton("Copied! 😃");
 				setTimeout(function () {
-					setCopyButton("Copy to Clipboard");
+					setCopyButton(`Copy to Clipboard`);
 				}, 1000);
 			});
 	};
@@ -502,6 +504,8 @@ const Summary = () => {
 		default:
 			terminology = "";
 	}
+	const theme = useTheme();
+	const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
 	return (
 		<Box>
@@ -514,8 +518,10 @@ const Summary = () => {
 					value={alignment}
 					exclusive
 					onChange={handleChange}>
-					<ToggleButton value='detailed'>Detailed</ToggleButton>
-					<ToggleButton value='simple'>Simple</ToggleButton>
+					<ToggleButton value='detailed'>
+						{mobile ? "D" : "Detailed"}
+					</ToggleButton>
+					<ToggleButton value='simple'>{mobile ? "S" : "Simple"}</ToggleButton>
 				</ToggleButtonGroup>
 			</Box>
 			<Box>

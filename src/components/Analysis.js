@@ -93,7 +93,7 @@ export default function Analysis() {
 	};
 	return (
 		<Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Raw Data
 				</Typography>
@@ -125,7 +125,7 @@ export default function Analysis() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Data Processing
 				</Typography>
@@ -157,7 +157,7 @@ export default function Analysis() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Impact of Uncertainty
 				</Typography>
@@ -189,7 +189,7 @@ export default function Analysis() {
 					</Grid>
 				</Grid>
 			</Box>
-			<Box sx={{ width: 250 }}>
+			<Box sx={{ width: "14rem" }}>
 				<Typography id='input-slider' gutterBottom>
 					Interpretation of Processed Data
 				</Typography>
